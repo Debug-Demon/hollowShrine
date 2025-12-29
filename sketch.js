@@ -84,6 +84,7 @@ let cultistSprite
 
 
 // SUMMON SPRITES:
+let summonCenter
 // COMMON
 let zombie1
 let zombie2
@@ -258,8 +259,8 @@ function preload() {
 // GAMESTATE SWITCH BUTTON
   switchButton = createButton("TRAVEL")
   shrine = loadImage("ClickerShrine.png.png") 
-  shopBg = loadImage("ShopBg.png")
-  shrineBg = loadImage("shrineBg.png")
+  shopBg = loadImage("shopBgs.gif")
+  shrineBg = loadImage("shrineBgs-1.gif")
   shopWidget = loadImage("ShopWidget.png")
 // Cursors AKA rituals
   cursorT1 = loadImage("ritualKnife.png")
@@ -361,7 +362,12 @@ function preload() {
   flame = loadImage("Flame.png")
   light = loadImage("Light.png")
   magic = loadImage("Magic.png")
-
+// ________________MISC_________________________
+    img = createImg(
+    'https://iili.io/fV9F7JS.gif',
+    'MENU BG.'
+  )
+    img.hide()
 }
 
 function setup() {  
@@ -372,15 +378,17 @@ function setup() {
   switchButton.mousePressed(toNav)
   base = 1
   baseAdd = 0
+  multiplier = 1
   multiplierBoost = 1
   offerMultiplier = 1
   greedMultiplier = 1
   cultistModifier = 0
   bestCursor = cursorT1
   createCanvas(800, 800)
-  gamestate = "summon"
+  gamestate = "game"
   substate = "center"
-
+  summonCenter = []
+  inventory = []
   ritualPrice = 20
   offerPrice = 50
   cultistPrice = 200
@@ -547,12 +555,12 @@ function draw() {
       
       // Draw the summon center sprites
       for (let i = 0; i < summonCenter.length; i++) {
-        let s = summonCenter[i];
+        let s = summonCenter[i]
 
-        // Draw the current frame
+        // Draw the frame
         image(
           s.image, // sprite image
-          350 + (i-1)*100, // x position (if i is at 1 then sprite one should be at 400 etc...)
+          350 + (i-1)*100, // x position (if i is at 1 then sprite one should be at 350 etc...)
           150, // y position
           s.size,  // display width
           s.size,  // display height
@@ -560,12 +568,12 @@ function draw() {
           0, // crop y
           s.size, // crop width
           s.size // crop height
-        );
+        )
 
         // Animate the sprite
-        s.frame += 0.1;
+        s.frame += 0.1
         if (s.frame >= s.totalFrames) {
-          s.frame = 0;
+          s.frame = 0
         }
         //COMMON
         if (summonCenter[i] == zombie1Sprite) {
@@ -846,9 +854,9 @@ function draw() {
         bgMusicMenu.play()
       }
       scale(0.5)
-      image(menuBg, 0,0)
       scale(2.7)
-      image(playsButton, 159,200)
+      img.show()
+      img.position(0,0)
       scale(1/2.7)
 
     }
@@ -894,30 +902,30 @@ function draw() {
 
       image(shopBg,0,0,800,600)
 
-      image(shopWidget, 400, -50, 400, 400)
-      image(shopWidget, 0, -50, 400, 400)
-      image(shopWidget, 400, 250, 400, 400)
-      image(shopWidget, 0, 250, 400, 400)
+      image(shopWidget, 400, -30, 400, 400)
+      image(shopWidget, 0, -30, 400, 400)
+      image(shopWidget, 400, 270, 400, 400)
+      image(shopWidget, 0, 270, 400, 400)
 
       fill(255)
       textSize(20)
       textFont("Ariel")
 
-      text("NEXT TIER RITUAL", 115, 140)
-      text("TIER   " + tierRitual, 165, 170)
-      text("Price " + ritualPrices[ritualShow], 165,195 )
+      text("NEXT TIER RITUAL", 115, 160)
+      text("TIER   " + tierRitual, 165, 190)
+      text("Price " + ritualPrices[ritualShow], 165,215 )
 
-      text("NEXT TIER OFFER", 515, 140)
-      text("TIER   " + tierOffer, 565, 170)
-      text("Price " + offerPrices[offerShow], 565,195 )
+      text("NEXT TIER OFFER", 515, 160)
+      text("TIER   " + tierOffer, 565, 190)
+      text("Price " + offerPrices[offerShow], 565,215 )
 
-      text("NEXT TIER CULTIST", 108, 440)
-      text("TIER   " + tierCultist, 165, 470)
-      text("Price " + cultistPrices[cultistShow], 165,500 )
+      text("NEXT TIER CULTIST", 108, 460)
+      text("TIER   " + tierCultist, 165, 490)
+      text("Price " + cultistPrices[cultistShow], 165,520 )
 
-      text("NEXT TIER GREED", 515, 440)
-      text("TIER   " + tierGreed, 565, 470)
-      text("Price " + greedPrices[greedShow], 565,500 )
+      text("NEXT TIER GREED", 515, 460)
+      text("TIER   " + tierGreed, 565, 490)
+      text("Price " + greedPrices[greedShow], 565,520 )
     }
   
   if (gamestate == "nav") {
@@ -961,7 +969,8 @@ function draw() {
 }
 
 function mousePressed() {
-
+  print(summonCenter)
+  print(inventory)
   if (gamestate == "game") {
       base = ritualBase[ritualShow]+cultistModifiers[cultistShow]
       multiplier = offerMultipliers[offerShow]* greedMultipliers[greedShow]
@@ -1060,13 +1069,14 @@ function mousePressed() {
   if (gamestate == "summon") {
 
     if (substate == "center") {
+      // saveGame()
       if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
         cursor(AUTO)
         substate = "inventory"
       }
       print(score)
 
-  // EGG 1 - COMMON
+      // EGG 1 - COMMON
       if (mouseX >= 8 && mouseX <= 98 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[0]) {
               score -= eggPrices[0]
@@ -1082,15 +1092,19 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<55) {  
                   zombie1Box.amount++
+                  inventory.push(zombie1Sprite)
               }
               if (randNum>=55 && randNum<90) { 
                   zombie2Box.amount++
+                  inventory.push(zombie2Sprite)
               }
               if (randNum>=90 && randNum<99) { 
                   zombie3Box.amount++
+                  inventory.push(zombie3Sprite)
               }
               if (randNum==100) { 
                   spearBox.amount++
+                  inventory.push(spearSprite)
               }
           } 
           if (score < eggPrices[0]) {
@@ -1106,7 +1120,7 @@ function mousePressed() {
           }
       }
 
-  // EGG 2 - UNCOMMON
+      // EGG 2 - UNCOMMON
       if (mouseX >= 125 && mouseX <= 215 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[1]) {
               score -= eggPrices[1]
@@ -1122,15 +1136,19 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   minotaur1Box.amount++
+                  inventory.push(minotaur1Sprite)
               }
               if (randNum>=40 && randNum<75) { 
                   minotaur2Box.amount++
+                  inventory.push(minotaur2Sprite)
               }
               if (randNum>=75 && randNum<95) { 
                   minotaur3Box.amount++
+                  inventory.push(minotaur3Sprite)
               }
               if (randNum>=95) { 
                   skeletonBox.amount++
+                  inventory.push(skeletonSprite)
               }
           } 
           if (score < eggPrices[1]) {
@@ -1146,7 +1164,7 @@ function mousePressed() {
           }
       }
 
-  // EGG 3 - RARE
+      // EGG 3 - RARE
       if (mouseX >= 242 && mouseX <= 332 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[2]) {
               score -= eggPrices[2]
@@ -1162,12 +1180,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<50) { 
                   ravenBox.amount++
+                  inventory.push(ravenSprite)
               }
               if (randNum>=50 && randNum<85) { 
                   mushroomBox.amount++
+                  inventory.push(mushroomSprite)
               }
               if (randNum>=85) { 
                   goblinBox.amount++
+                  inventory.push(goblinSprite)
               }
           } 
           if (score < eggPrices[2]) {
@@ -1183,7 +1204,7 @@ function mousePressed() {
           }
       }
 
-  // EGG 4 - LEGENDARY
+      // EGG 4 - LEGENDARY
       if (mouseX >= 359 && mouseX <= 449 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[3]) {
               score -= eggPrices[3]
@@ -1199,15 +1220,19 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   goblinBeastBox.amount++
+                  inventory.push(goblinBeastSprite)
               }
               if (randNum>=40 && randNum<70) { 
                   ancientSkeletonBox.amount++
+                  inventory.push(ancientSkeletonSprite)
               }
               if (randNum>=70 && randNum<95) { 
                   goblinRiderBox.amount++
+                  inventory.push(goblinRiderSprite)
               }
               if (randNum>=95) { 
                   necromancerBox.amount++
+                  inventory.push(necromancerSprite)
               }
           } 
           if (score < eggPrices[3]) {
@@ -1223,7 +1248,7 @@ function mousePressed() {
           }
       }
 
-  // EGG 5 - MYTHIC
+      // EGG 5 - MYTHIC
       if (mouseX >= 476 && mouseX <= 566 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[4]) {
               score -= eggPrices[4]
@@ -1239,15 +1264,19 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   kitsuneBox.amount++
+                  inventory.push(kitsuneSprite)
               }
               if (randNum>=40 && randNum<70) { 
                   eyeBox.amount++
+                  inventory.push(eyeSprite)
               }
               if (randNum>=70 && randNum<95) { 
                   knightBox.amount++
+                  inventory.push(knightSprite)
               }
               if (randNum>=95) { 
                   flareBox.amount++
+                  inventory.push(flareSprite)
               }
           } 
           if (score < eggPrices[4]) {
@@ -1263,7 +1292,7 @@ function mousePressed() {
           }
       }
 
-   // EGG 6 - GODLY
+      // EGG 6 - GODLY
       if (mouseX >= 593 && mouseX <= 683 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[5]) {
               score -= eggPrices[5]
@@ -1279,15 +1308,19 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   skeletonGeneralBox.amount++
+                  inventory.push(skeletonGeneralSprite)
               }
               if (randNum>=40 && randNum<65) { 
                   plant1Box.amount++
+                  inventory.push(plant1Sprite)
               }
               if (randNum>=65 && randNum<90) { 
                   archerBox.amount++
+                  inventory.push(archerSprite)
               }
               if (randNum>=90) { 
                   skeletonKingBox.amount++
+                  inventory.push(skeletonKingSprite)
               }
           } 
           if (score < eggPrices[5]) {
@@ -1303,7 +1336,7 @@ function mousePressed() {
           }
       }
 
-  // EGG 7 - FORBIDDEN
+      // EGG 7 - FORBIDDEN
       if (mouseX >= 710 && mouseX <= 800 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[6]) {
               score -= eggPrices[6]
@@ -1319,12 +1352,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   flameBox.amount++
+                  inventory.push(flameSprite)
               }
               if (randNum>=40 && randNum<70) { 
                   lightBox.amount++
+                  inventory.push(lightSprite)
               }
               if (randNum>=70 && randNum<99) { 
                   magicBox.amount++
+                  inventory.push(magicSprite)
               }
           } 
           if (score < eggPrices[6]) {
@@ -1338,14 +1374,15 @@ function mousePressed() {
                   timerProgressBar: true
               })
           }
-      }
+      } // egg 7 end here
 
-    }
+
+    } 
     if (substate == "inventory") {
+    
 // ====================== COMMON ======================
       // zombie1Box
-      if (mouseX >= zombie1Box.x && mouseX <= zombie1Box.x + zombie1Box.size &&
-          mouseY >= zombie1Box.y && mouseY <= zombie1Box.y + zombie1Box.size) {
+      if (mouseX >= zombie1Box.x && mouseX <= zombie1Box.x + zombie1Box.size && mouseY >=  zombie1Box.y && mouseY <= zombie1Box.y + zombie1Box.size) {
 
         if (summonCenter.length == maxCenter) {
           Swal.fire({
@@ -1381,8 +1418,7 @@ function mousePressed() {
       }
 
       // zombie2Box
-      if (mouseX >= zombie2Box.x && mouseX <= zombie2Box.x + zombie2Box.size &&
-          mouseY >= zombie2Box.y && mouseY <= zombie2Box.y + zombie2Box.size) {
+      if (mouseX >= zombie2Box.x && mouseX <= zombie2Box.x + zombie2Box.size && mouseY >= zombie2Box.y && mouseY <= zombie2Box.y + zombie2Box.size) {
 
         if (summonCenter.length == maxCenter) {
           Swal.fire({
@@ -1418,8 +1454,7 @@ function mousePressed() {
       }
 
       // zombie3Box
-      if (mouseX >= zombie3Box.x && mouseX <= zombie3Box.x + zombie3Box.size &&
-          mouseY >= zombie3Box.y && mouseY <= zombie3Box.y + zombie3Box.size) {
+      if (mouseX >= zombie3Box.x && mouseX <= zombie3Box.x + zombie3Box.size && mouseY >= zombie3Box.y && mouseY <= zombie3Box.y + zombie3Box.size) {
 
         if (summonCenter.length == maxCenter) {
           Swal.fire({
@@ -1455,8 +1490,7 @@ function mousePressed() {
       }
 
       // spearBox
-      if (mouseX >= spearBox.x && mouseX <= spearBox.x + spearBox.size &&
-          mouseY >= spearBox.y && mouseY <= spearBox.y + spearBox.size) {
+      if (mouseX >= spearBox.x && mouseX <= spearBox.x + spearBox.size && mouseY >= spearBox.y && mouseY <= spearBox.y + spearBox.size) {
 
         if (summonCenter.length == maxCenter) {
           Swal.fire({
@@ -2337,7 +2371,6 @@ function mousePressed() {
 
 function saveGame() {
   storeItem("score", score)
-
   storeItem("ritualShow", ritualShow)
   storeItem("offerShow", offerShow)
   storeItem("cultistShow", cultistShow)
@@ -2346,6 +2379,9 @@ function saveGame() {
   storeItem("tierOffer", tierOffer)
   storeItem("tierCultist", tierCultist)
   storeItem("tierGreed", tierGreed)
+  
+  storeItem("summonCenter", summonCenter)
+  storeItem("inventory", inventory)
 }
 
 function loadGame() {
@@ -2393,6 +2429,17 @@ function loadGame() {
   if (tg !== null) {
     tierGreed = tg
   }
+  
+  let i = getItem('inventory')
+  if (i && i.length > 0) {
+      inventory = i
+  }
+
+  let sc = getItem('summonCenter')
+  if (sc && sc.length > 0) {
+      summonCenter = sc
+  }
+
 
 //   THIS IS TO ENSURE THAT THE CULTIST ALSO SAVES!
   cultistSprite.image = cultistSpriteArray[cultistShow]
@@ -2403,7 +2450,7 @@ function loadGame() {
 
 
 function gameDelete() {
-  let confirmed = confirm("WAIT")
+  let confirmed = confirm("WAIT! ARE YOU SURE?")
   if (confirmed) {
     removeItem("score", score)
     removeItem("ritualShow", ritualShow)
