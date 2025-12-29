@@ -439,7 +439,41 @@ function setup() {
   cultistShow = 1 
   greedShow = 1
   
+    zombie1SpriteToken = 0
+  zombie2SpriteToken = 0
+  zombie3SpriteToken = 0
+  spearSpriteToken = 0
+
+  minotaur1SpriteToken = 0
+  minotaur2SpriteToken = 0
+  minotaur3SpriteToken = 0
+  skeletonSpriteToken = 0
+
+  ravenSpriteToken = 0
+  mushroomSpriteToken = 0
+  goblinSpriteToken = 0
+
+  goblinBeastSpriteToken = 0
+  ancientSkeletonSpriteToken = 0
+  goblinRiderSpriteToken = 0
+  necromancerSpriteToken = 0
+
+  kitsuneSpriteToken = 0
+  eyeSpriteToken = 0
+  knightSpriteToken = 0
+  flareSpriteToken = 0
+
+  skeletonGeneralSpriteToken = 0
+  plant1SpriteToken = 0
+  archerSpriteToken = 0
+  skeletonKingSpriteToken = 0
+
+  flameSpriteToken = 0
+  lightSpriteToken = 0
+  magicSpriteToken = 0
   
+  
+  loadOnce = true
   
   
 
@@ -563,6 +597,42 @@ function setup() {
 function draw() {
   if (gamestate == "summon") {
       bgMusicShrine.stop()
+    if (loadOnce == true) {
+            zombie1Box.amount = zombie1SpriteToken
+      zombie2Box.amount = zombie2SpriteToken
+      zombie3Box.amount = zombie3SpriteToken
+      spearBox.amount = spearSpriteToken
+
+      minotaur1Box.amount = minotaur1SpriteToken
+      minotaur2Box.amount = minotaur2SpriteToken
+      minotaur3Box.amount = minotaur3SpriteToken
+      skeletonBox.amount = skeletonSpriteToken
+
+      ravenBox.amount = ravenSpriteToken
+      mushroomBox.amount = mushroomSpriteToken
+      goblinBox.amount = goblinSpriteToken
+
+      goblinBeastBox.amount = goblinBeastSpriteToken
+      ancientSkeletonBox.amount = ancientSkeletonSpriteToken
+      goblinRiderBox.amount = goblinRiderSpriteToken
+      necromancerBox.amount = necromancerSpriteToken
+
+      kitsuneBox.amount = kitsuneSpriteToken
+      eyeBox.amount = eyeSpriteToken
+      knightBox.amount = knightSpriteToken
+      flareBox.amount = flareSpriteToken
+
+      skeletonGeneralBox.amount = skeletonGeneralSpriteToken
+      plant1Box.amount = plant1SpriteToken
+      archerBox.amount = archerSpriteToken
+      skeletonKingBox.amount = skeletonKingSpriteToken
+
+      flameBox.amount = flameSpriteToken
+      lightBox.amount = lightSpriteToken
+      magicBox.amount = magicSpriteToken
+      
+      loadOnce = false
+    }
     //   P5JS cant store objects. So i have to take the long path and create a token for each sprite that can be used to change the amount later
       for (let i; i<= summonCenter.length; i++) {
         // COMMON
@@ -1300,6 +1370,7 @@ function mousePressed() {
 
     if (substate == "center") {
       saveGame()
+
       if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
         cursor(AUTO)
         substate = "inventory"
@@ -1610,38 +1681,7 @@ function mousePressed() {
     } 
     if (substate == "inventory") {
       saveGame()
-      zombie1Box.amount = zombie1SpriteToken
-      zombie2Box.amount = zombie2SpriteToken
-      zombie3Box.amount = zombie3SpriteToken
-      spearBox.amount = spearSpriteToken
-
-      minotaur1Box.amount = minotaur1SpriteToken
-      minotaur2Box.amount = minotaur2SpriteToken
-      minotaur3Box.amount = minotaur3SpriteToken
-      skeletonBox.amount = skeletonSpriteToken
-
-      ravenBox.amount = ravenSpriteToken
-      mushroomBox.amount = mushroomSpriteToken
-      goblinBox.amount = goblinSpriteToken
-
-      goblinBeastBox.amount = goblinBeastSpriteToken
-      ancientSkeletonBox.amount = ancientSkeletonSpriteToken
-      goblinRiderBox.amount = goblinRiderSpriteToken
-      necromancerBox.amount = necromancerSpriteToken
-
-      kitsuneBox.amount = kitsuneSpriteToken
-      eyeBox.amount = eyeSpriteToken
-      knightBox.amount = knightSpriteToken
-      flareBox.amount = flareSpriteToken
-
-      skeletonGeneralBox.amount = skeletonGeneralSpriteToken
-      plant1Box.amount = plant1SpriteToken
-      archerBox.amount = archerSpriteToken
-      skeletonKingBox.amount = skeletonKingSpriteToken
-
-      flameBox.amount = flameSpriteToken
-      lightBox.amount = lightSpriteToken
-      magicBox.amount = magicSpriteToken
+      
 
 // ====================== COMMON ======================
       // zombie1Box
