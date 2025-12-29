@@ -1069,7 +1069,7 @@ function mousePressed() {
   if (gamestate == "summon") {
 
     if (substate == "center") {
-      // saveGame()
+      saveGame()
       if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
         cursor(AUTO)
         substate = "inventory"
@@ -1379,7 +1379,7 @@ function mousePressed() {
 
     } 
     if (substate == "inventory") {
-    
+    saveGame()
 // ====================== COMMON ======================
       // zombie1Box
       if (mouseX >= zombie1Box.x && mouseX <= zombie1Box.x + zombie1Box.size && mouseY >=  zombie1Box.y && mouseY <= zombie1Box.y + zombie1Box.size) {
