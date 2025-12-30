@@ -6,7 +6,7 @@
 
 
 // CUSTOM LOADING SCREEN:
-// https://stackoverflow.com/questions/77782145/how-to-customize-p5-js-default-loading-animation-in-preload
+//   https://stackoverflow.com/questions/77782145/how-to-customize-p5-js-default-loading-animation-in-preload
 
 
 // ______________________________________VARIABLES_________________________
@@ -403,7 +403,7 @@ function preload() {
   flame = loadImage("Flame.png")
   light = loadImage("Light.png")
   magic = loadImage("Magic.png")
-// ________________MISC_________________________
+// ________________other stuff_________________________
     img = createImg(
     'https://iili.io/fV9F7JS.gif',
     'MENU BG.'
@@ -591,6 +591,8 @@ function setup() {
   flameBox = new InventoryBox(120, 620, flameSprite)
   lightBox = new InventoryBox(220, 620, lightSprite)
   magicBox = new InventoryBox(320, 620, magicSprite)
+  
+  
   loadGame()
 } 
 // --------------------------------GAME LOOP------------------------------------------------------
@@ -2673,7 +2675,39 @@ function mousePressed() {
 
 
 function saveGame() {
+  zombie1SpriteToken = zombie1Box.amount
+  zombie2SpriteToken = zombie2Box.amount
+  zombie3SpriteToken = zombie3Box.amount
+  spearSpriteToken = spearBox.amount
 
+  minotaur1SpriteToken = minotaur1Box.amount
+  minotaur2SpriteToken = minotaur2Box.amount
+  minotaur3SpriteToken = minotaur3Box.amount
+  skeletonSpriteToken = skeletonBox.amount
+
+  ravenSpriteToken = ravenBox.amount
+  mushroomSpriteToken = mushroomBox.amount
+  goblinSpriteToken = goblinBox.amount
+
+  goblinBeastSpriteToken = goblinBeastBox.amount
+  ancientSkeletonSpriteToken = ancientSkeletonBox.amount
+  goblinRiderSpriteToken = goblinRiderBox.amount
+  necromancerSpriteToken = necromancerBox.amount
+
+  kitsuneSpriteToken = kitsuneBox.amount
+  eyeSpriteToken = eyeBox.amount
+  knightSpriteToken = knightBox.amount
+  flareSpriteToken = flareBox.amount
+
+  skeletonGeneralSpriteToken = skeletonGeneralBox.amount
+  plant1SpriteToken = plant1Box.amount
+  archerSpriteToken = archerBox.amount
+  skeletonKingSpriteToken = skeletonKingBox.amount
+
+  flameSpriteToken = flameBox.amount
+  lightSpriteToken = lightBox.amount
+  magicSpriteToken = magicBox.amount
+  
   storeItem("score", score)
   storeItem("ritualShow", ritualShow)
   storeItem("offerShow", offerShow)
@@ -2766,6 +2800,136 @@ function loadGame() {
     tierGreed = tg
   }
   
+    let z1 = getItem("zombie1SpriteToken")
+  if (z1 !== null) {
+    zombie1SpriteToken = z1
+  }
+
+  let z2 = getItem("zombie2SpriteToken")
+  if (z2 !== null) {
+    zombie2SpriteToken = z2
+  }
+
+  let z3 = getItem("zombie3SpriteToken")
+  if (z3 !== null) {
+    zombie3SpriteToken = z3
+  }
+
+  let sp = getItem("spearSpriteToken")
+  if (sp !== null) {
+    spearSpriteToken = sp
+  }
+
+  let m1 = getItem("minotaur1SpriteToken")
+  if (m1 !== null) {
+    minotaur1SpriteToken = m1
+  }
+
+  let m2 = getItem("minotaur2SpriteToken")
+  if (m2 !== null) {
+    minotaur2SpriteToken = m2
+  }
+
+  let m3 = getItem("minotaur3SpriteToken")
+  if (m3 !== null) {
+    minotaur3SpriteToken = m3
+  }
+
+  let sk = getItem("skeletonSpriteToken")
+  if (sk !== null) {
+    skeletonSpriteToken = sk
+  }
+
+  let rv = getItem("ravenSpriteToken")
+  if (rv !== null) {
+    ravenSpriteToken = rv
+  }
+
+  let ms = getItem("mushroomSpriteToken")
+  if (ms !== null) {
+    mushroomSpriteToken = ms
+  }
+
+  let gb = getItem("goblinSpriteToken")
+  if (gb !== null) {
+    goblinSpriteToken = gb
+  }
+
+  let gbt = getItem("goblinBeastSpriteToken")
+  if (gbt !== null) {
+    goblinBeastSpriteToken = gbt
+  }
+
+  let as = getItem("ancientSkeletonSpriteToken")
+  if (as !== null) {
+    ancientSkeletonSpriteToken = as
+  }
+
+  let gr = getItem("goblinRiderSpriteToken")
+  if (gr !== null) {
+    goblinRiderSpriteToken = gr
+  }
+
+  let nc = getItem("necromancerSpriteToken")
+  if (nc !== null) {
+    necromancerSpriteToken = nc
+  }
+
+  let kt = getItem("kitsuneSpriteToken")
+  if (kt !== null) {
+    kitsuneSpriteToken = kt
+  }
+
+  let ey = getItem("eyeSpriteToken")
+  if (ey !== null) {
+    eyeSpriteToken = ey
+  }
+
+  let kn = getItem("knightSpriteToken")
+  if (kn !== null) {
+    knightSpriteToken = kn
+  }
+
+  let fl = getItem("flareSpriteToken")
+  if (fl !== null) {
+    flareSpriteToken = fl
+  }
+
+  let sg = getItem("skeletonGeneralSpriteToken")
+  if (sg !== null) {
+    skeletonGeneralSpriteToken = sg
+  }
+
+  let pl = getItem("plant1SpriteToken")
+  if (pl !== null) {
+    plant1SpriteToken = pl
+  }
+
+  let ar = getItem("archerSpriteToken")
+  if (ar !== null) {
+    archerSpriteToken = ar
+  }
+
+  let skk = getItem("skeletonKingSpriteToken")
+  if (skk !== null) {
+    skeletonKingSpriteToken = skk
+  }
+
+  let fm = getItem("flameSpriteToken")
+  if (fm !== null) {
+    flameSpriteToken = fm
+  }
+
+  let li = getItem("lightSpriteToken")
+  if (li !== null) {
+    lightSpriteToken = li
+  }
+
+  let mg = getItem("magicSpriteToken")
+  if (mg !== null) {
+    magicSpriteToken = mg
+  }
+  
   let i = getItem('inventory')
   if (i && i.length > 0) {
       // inventory = i
@@ -2775,6 +2939,38 @@ function loadGame() {
   if (sc && sc.length > 0) {
       // summonCenter = sc
   }
+  zombie1Box.amount = zombie1SpriteToken
+  zombie2Box.amount = zombie2SpriteToken
+  zombie3Box.amount = zombie3SpriteToken
+  spearBox.amount = spearSpriteToken
+
+  minotaur1Box.amount = minotaur1SpriteToken
+  minotaur2Box.amount = minotaur2SpriteToken
+  minotaur3Box.amount = minotaur3SpriteToken
+  skeletonBox.amount = skeletonSpriteToken
+
+  ravenBox.amount = ravenSpriteToken
+  mushroomBox.amount = mushroomSpriteToken
+  goblinBox.amount = goblinSpriteToken
+
+  goblinBeastBox.amount = goblinBeastSpriteToken
+  ancientSkeletonBox.amount = ancientSkeletonSpriteToken
+  goblinRiderBox.amount = goblinRiderSpriteToken
+  necromancerBox.amount = necromancerSpriteToken
+
+  kitsuneBox.amount = kitsuneSpriteToken
+  eyeBox.amount = eyeSpriteToken
+  knightBox.amount = knightSpriteToken
+  flareBox.amount = flareSpriteToken
+
+  skeletonGeneralBox.amount = skeletonGeneralSpriteToken
+  plant1Box.amount = plant1SpriteToken
+  archerBox.amount = archerSpriteToken
+  skeletonKingBox.amount = skeletonKingSpriteToken
+
+  flameBox.amount = flameSpriteToken
+  lightBox.amount = lightSpriteToken
+  magicBox.amount = magicSpriteToken
 
 
 //   THIS IS TO ENSURE THAT THE CULTIST ALSO SAVES!
@@ -2806,3 +3002,6 @@ function toNav() {
   gamestate = "nav"
   switchButton.hide()
 }
+
+// TO DOS --
+// MAKE IT SO THAT SUMMON CENTER ALSO SAVES
