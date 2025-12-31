@@ -598,233 +598,11 @@ function setup() {
 // --------------------------------GAME LOOP------------------------------------------------------
 function draw() {
   if (gamestate == "summon") {
-      bgMusicShrine.stop()
-    if (loadOnce == true) {
-            zombie1Box.amount = zombie1SpriteToken
-      zombie2Box.amount = zombie2SpriteToken
-      zombie3Box.amount = zombie3SpriteToken
-      spearBox.amount = spearSpriteToken
-
-      minotaur1Box.amount = minotaur1SpriteToken
-      minotaur2Box.amount = minotaur2SpriteToken
-      minotaur3Box.amount = minotaur3SpriteToken
-      skeletonBox.amount = skeletonSpriteToken
-
-      ravenBox.amount = ravenSpriteToken
-      mushroomBox.amount = mushroomSpriteToken
-      goblinBox.amount = goblinSpriteToken
-
-      goblinBeastBox.amount = goblinBeastSpriteToken
-      ancientSkeletonBox.amount = ancientSkeletonSpriteToken
-      goblinRiderBox.amount = goblinRiderSpriteToken
-      necromancerBox.amount = necromancerSpriteToken
-
-      kitsuneBox.amount = kitsuneSpriteToken
-      eyeBox.amount = eyeSpriteToken
-      knightBox.amount = knightSpriteToken
-      flareBox.amount = flareSpriteToken
-
-      skeletonGeneralBox.amount = skeletonGeneralSpriteToken
-      plant1Box.amount = plant1SpriteToken
-      archerBox.amount = archerSpriteToken
-      skeletonKingBox.amount = skeletonKingSpriteToken
-
-      flameBox.amount = flameSpriteToken
-      lightBox.amount = lightSpriteToken
-      magicBox.amount = magicSpriteToken
+    bgMusicShrine.stop()
+    tokenAdd()
       
-      loadOnce = false
-    }
-    //   P5JS cant store objects. So i have to take the long path and create a token for each sprite that can be used to change the amount later
-      for (let i; i<= summonCenter.length; i++) {
-        // COMMON
-        if(summonCenter.length > 0) {
-          if (summonCenter[i] == zombie1Sprite) {
-              zombie1SpriteToken++
-          }
-          if (summonCenter[i] == zombie2Sprite) {
-              zombie2SpriteToken++
-          }
-          if (summonCenter[i] == zombie3Sprite) {
-              zombie3SpriteToken++
-          }
-          if (summonCenter[i] == spearSprite) {
-              spearSpriteToken++
-          }
-
-          // UNCOMMON
-          if (summonCenter[i] == minotaur1Sprite) {
-              minotaur1SpriteToken++
-          }
-          if (summonCenter[i] == minotaur2Sprite) {
-              minotaur2SpriteToken++
-          }
-          if (summonCenter[i] == minotaur3Sprite) {
-              minotaur3SpriteToken++
-          }
-          if (summonCenter[i] == skeletonSprite) {
-              skeletonSpriteToken++
-          }
-
-          // RARE
-          if (summonCenter[i] == ravenSprite) {
-              ravenSpriteToken++
-          }
-          if (summonCenter[i] == mushroomSprite) {
-              mushroomSpriteToken++
-          }
-          if (summonCenter[i] == goblinSprite) {
-              goblinSpriteToken++
-          }
-
-          // LEGENDARY
-          if (summonCenter[i] == goblinBeastSprite) {
-              goblinBeastSpriteToken++
-          }
-          if (summonCenter[i] == ancientSkeletonSprite) {
-              ancientSkeletonSpriteToken++
-          }
-          if (summonCenter[i] == goblinRiderSprite) {
-              goblinRiderSpriteToken++
-          }
-          if (summonCenter[i] == necromancerSprite) {
-              necromancerSpriteToken++
-          }
-
-          // MYTHIC
-          if (summonCenter[i] == kitsuneSprite) {
-              kitsuneSpriteToken++
-          }
-          if (summonCenter[i] == eyeSprite) {
-              eyeSpriteToken++
-          }
-          if (summonCenter[i] == knightSprite) {
-              knightSpriteToken++
-          }
-          if (summonCenter[i] == flareSprite) {
-              flareSpriteToken++
-          }
-
-          // GODLY
-          if (summonCenter[i] == skeletonGeneralSprite) {
-              skeletonGeneralSpriteToken++
-          }
-          if (summonCenter[i] == plant1Sprite) {
-              plant1SpriteToken++
-          }
-          if (summonCenter[i] == archerSprite) {
-              archerSpriteToken++
-          }
-          if (summonCenter[i] == skeletonKingSprite) {
-              skeletonKingSpriteToken++
-          }
-
-          // FORBIDDEN
-          if (summonCenter[i] == flameSprite) {
-              flameSpriteToken++
-          }
-          if (summonCenter[i] == lightSprite) {
-              lightSpriteToken++
-          }
-          if (summonCenter[i] == magicSprite) {
-              magicSpriteToken++
-          }
-        }
-
-        if (inventory.length>0) {
-          if (inventory[i] == zombie1Sprite) {
-              zombie1SpriteToken++
-          }
-          if (inventory[i] == zombie2Sprite) {
-              zombie2SpriteToken++
-          }
-          if (inventory[i] == zombie3Sprite) {
-              zombie3SpriteToken++
-          }
-          if (inventory[i] == spearSprite) {
-              spearSpriteToken++
-          }
-
-          // UNCOMMON
-          if (inventory[i] == minotaur1Sprite) {
-              minotaur1SpriteToken++
-          }
-          if (inventory[i] == minotaur2Sprite) {
-              minotaur2SpriteToken++
-          }
-          if (inventory[i] == minotaur3Sprite) {
-              minotaur3SpriteToken++
-          }
-          if (inventory[i] == skeletonSprite) {
-              skeletonSpriteToken++
-          }
-
-          // RARE
-          if (inventory[i] == ravenSprite) {
-              ravenSpriteToken++
-          }
-          if (inventory[i] == mushroomSprite) {
-              mushroomSpriteToken++
-          }
-          if (inventory[i] == goblinSprite) {
-              goblinSpriteToken++
-          }
-
-          // LEGENDARY
-          if (inventory[i] == goblinBeastSprite) {
-              goblinBeastSpriteToken++
-          }
-          if (inventory[i] == ancientSkeletonSprite) {
-              ancientSkeletonSpriteToken++
-          }
-          if (inventory[i] == goblinRiderSprite) {
-              goblinRiderSpriteToken++
-          }
-          if (inventory[i] == necromancerSprite) {
-              necromancerSpriteToken++
-          }
-
-          // MYTHIC
-          if (inventory[i] == kitsuneSprite) {
-              kitsuneSpriteToken++
-          }
-          if (inventory[i] == eyeSprite) {
-              eyeSpriteToken++
-          }
-          if (inventory[i] == knightSprite) {
-              knightSpriteToken++
-          }
-          if (inventory[i] == flareSprite) {
-              flareSpriteToken++
-          }
-
-          // GODLY
-          if (inventory[i] == skeletonGeneralSprite) {
-              skeletonGeneralSpriteToken++
-          }
-          if (inventory[i] == plant1Sprite) {
-              plant1SpriteToken++
-          }
-          if (inventory[i] == archerSprite) {
-              archerSpriteToken++
-          }
-          if (inventory[i] == skeletonKingSprite) {
-              skeletonKingSpriteToken++
-          }
-
-          // FORBIDDEN
-          if (inventory[i] == flameSprite) {
-              flameSpriteToken++
-          }
-          if (inventory[i] == lightSprite) {
-              lightSpriteToken++
-          }
-          if (inventory[i] == magicSprite) {
-              magicSpriteToken++
-          }
-        }
-      }
     if(substate == "center")  {
+      tokenAdd()
       if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
         cursor(HAND)
       } else {
@@ -1096,6 +874,7 @@ function draw() {
 
   }
     if(substate == "inventory") {
+      tokenAdd()
       fill(28,28,28)
       rect(0,0,800,800)
       switchButton.show()
@@ -2937,7 +2716,7 @@ function loadGame() {
 
   let sc = getItem('summonCenter')
   if (sc && sc.length > 0) {
-      // summonCenter = sc
+      // summonCenter = sc 
   }
   zombie1Box.amount = zombie1SpriteToken
   zombie2Box.amount = zombie2SpriteToken
@@ -2993,6 +2772,7 @@ function gameDelete() {
     removeItem("tierOffer", tierOffer)
     removeItem("tierCultist", tierCultist)
     removeItem("tierGreed", tierGreed)
+    gamestate = "end"
   }  
   
 }
@@ -3003,5 +2783,105 @@ function toNav() {
   switchButton.hide()
 }
 
+
+function tokenAdd() {
+  for (let i = 0; i < summonCenter.length; i++) {
+    // COMMON
+    if (summonCenter.length > 0) {
+        if (summonCenter[i] == zombie1Sprite) {
+            zombie1SpriteToken++
+        }
+        if (summonCenter[i] == zombie2Sprite) {
+            zombie2SpriteToken++
+        }
+        if (summonCenter[i] == zombie3Sprite) {
+            zombie3SpriteToken++
+        }
+        if (summonCenter[i] == spearSprite) {
+            spearSpriteToken++
+        }
+
+        // UNCOMMON
+        if (summonCenter[i] == minotaur1Sprite) {
+            minotaur1SpriteToken++
+        }
+        if (summonCenter[i] == minotaur2Sprite) {
+            minotaur2SpriteToken++
+        }
+        if (summonCenter[i] == minotaur3Sprite) {
+            minotaur3SpriteToken++
+        }
+        if (summonCenter[i] == skeletonSprite) {
+            skeletonSpriteToken++
+        }
+
+        // RARE
+        if (summonCenter[i] == ravenSprite) {
+            ravenSpriteToken++
+        }
+        if (summonCenter[i] == mushroomSprite) {
+            mushroomSpriteToken++
+        }
+        if (summonCenter[i] == goblinSprite) {
+            goblinSpriteToken++
+        }
+
+        // LEGENDARY
+        if (summonCenter[i] == goblinBeastSprite) {
+            goblinBeastSpriteToken++
+        }
+        if (summonCenter[i] == ancientSkeletonSprite) {
+            ancientSkeletonSkeletonToken++
+        }
+        if (summonCenter[i] == goblinRiderSprite) {
+            goblinRiderSpriteToken++
+        }
+        if (summonCenter[i] == necromancerSprite) {
+            necromancerSpriteToken++
+        }
+
+        // MYTHIC
+        if (summonCenter[i] == kitsuneSprite) {
+            kitsuneSpriteToken++
+        }
+        if (summonCenter[i] == eyeSprite) {
+            eyeSpriteToken++
+        }
+        if (summonCenter[i] == knightSprite) {
+            knightSpriteToken++
+        }
+        if (summonCenter[i] == flareSprite) {
+            flareSpriteToken++
+        }
+
+        // GODLY
+        if (summonCenter[i] == skeletonGeneralSprite) {
+            skeletonGeneralSpriteToken++
+        }
+        if (summonCenter[i] == plant1Sprite) {
+            plant1SpriteToken++
+        }
+        if (summonCenter[i] == archerSprite) {
+            archerSpriteToken++
+        }
+        if (summonCenter[i] == skeletonKingSprite) {
+            skeletonKingSpriteToken++
+        }
+
+        // FORBIDDEN
+        if (summonCenter[i] == flameSprite) {
+            flameSpriteToken++
+        }
+        if (summonCenter[i] == lightSprite) {
+            lightSpriteToken++
+        }
+        if (summonCenter[i] == magicSprite) {
+            magicSpriteToken++
+        }
+    }
+}
+}
+
 // TO DOS --
-// MAKE IT SO THAT SUMMON CENTER ALSO SAVES
+// erase progress should erase summons
+// resolve confusion between the summon center array and inventory array.
