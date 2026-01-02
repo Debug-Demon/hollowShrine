@@ -81,7 +81,7 @@ let cultistSpriteArray
 let T1idleSheet, T2idleSheet, T3idleSheet, T4idleSheet, T5idleSheet, T6idleSheet, T7idleSheet, T8idleSheet, T9idleSheet, T10idleSheet
 
 let cultistSprite
-
+let mouseOn = true
 
 // SUMMON SPRITES:
 // TOKENS
@@ -315,11 +315,10 @@ function preload() {
   cursorT9 = loadImage("ritualScroll.png")
   cursorT10 = loadImage("ritualRing.png")
 //   Menu images
-  menuBg = loadImage("menuBg.png")
+  menuBg = loadImage("menuBG.gif")
   playsButton = loadImage("playPNG.png")
-  loadProgressButton = loadImage("loadPNG.png.png")
-  optionsButton = loadImage("optionPNG.png")
-  exitButton = loadImage("exitPNG.png")
+  statue = loadImage("statue.png")
+
   
   
   //   fonts
@@ -339,7 +338,7 @@ function preload() {
   
 //   music
   bgMusicShrine = loadSound("bgMusicShrine.mp3")
-  bgMusicMenu = loadSound("BgMusic.mp3")
+  bgMusicMenu = loadSound("Bgmusic.mp3")
 //     ritual sounds
   ritualT1Sound = loadSound("ritualT1Sound.mp3")
   ritualT2Sound = loadSound("ritualT2Sound.mp3")
@@ -404,14 +403,13 @@ function preload() {
   light = loadImage("Light.png")
   magic = loadImage("Magic.png")
 // ________________other stuff_________________________
-    img = createImg(
-    'https://iili.io/fV9F7JS.gif',
-    'MENU BG.'
-  )
-    img.hide()
+ 
+
 }
 
 function setup() {  
+  
+  createCanvas(800, 800)
   switchButton.show()
   eraseButton.show()
   score = 100000000000
@@ -425,11 +423,31 @@ function setup() {
   greedMultiplier = 1
   cultistModifier = 0
   bestCursor = cursorT1
-  createCanvas(800, 800)
-  gamestate = "game"
+  statue1 = createImg("statue.png", "",statue1load())
+  statue2 = createImg("statue.png", "", statue2load())
+  playText = createP("PLAY")
+  tutorialText = createP("TUTORIAL")
+  statue1.style('z-index', 0)
+  statue1.position(0, 100)
+  statue1.mousePressed(toGame)
+  textSize(20)
+  playText.position(80,120)
+  playText.style('z-index', 1)
+  statue2.style('z-index', 0)
+  statue2.position(550, 100)
+  statue2.mousePressed(toTutorial)
+  textSize(20)
+  tutorialText.position(615,120)
+  tutorialText.style('z-index', 1)
+  bgMusicShrine.stop()
+  switchButton.hide()
+  playText.hide()
+  tutorialText.hide()
+  statue1.hide()
+  statue2.hide()
+  gamestate = "menu"
   substate = "center"
   summonCenter = []
-  inventory = []
   ritualPrice = 20
   offerPrice = 50
   cultistPrice = 200
@@ -506,7 +524,7 @@ function setup() {
   ritualSoundArray = [0,ritualT1Sound, ritualT2Sound, ritualT3Sound, ritualT4Sound, ritualT5Sound, ritualT6Sound, ritualT7Sound, ritualT8Sound, ritualT9Sound, ritualT10Sound]
   
   summonCenter = []
-  maxCenter = 3
+  maxCenter = 3 //max amount in summon center
 // *********************************NEW CLASS******************************************
   cultistSprite = new Sprite(cultistSpriteArray[offerShow], 20, 350, 3)
   // COMMON
@@ -923,12 +941,21 @@ function draw() {
   }
 
   
-  // what to do if its in the clicking shrine place
+
 
     if (gamestate == "menu") {
+      
+      scale(1.3)
+
+      image(menuBg, 0,0, menuBg.width, 400)
+      scale(1/1.3)
+      statue1.show()
+      playText.show()
+      statue2.show()
+      tutorialText.show()
       bgMusicShrine.stop()
       switchButton.hide()
-      //   Elegant and simple way of checking if sound is playing and ensure that the game doesn't crash
+      
       if (bgMusicMenu.isPlaying()) {
 
       } else {
@@ -936,13 +963,14 @@ function draw() {
       }
       scale(0.5)
       scale(2.7)
-      img.show()
-      img.position(0,0)
       scale(1/2.7)
 
     }
     if (gamestate == "game") {
-
+      statue1.hide()
+      playText.hide()
+      statue2.hide()
+      tutorialText.hide()
       bgMusicMenu.stop()
       switchButton.show()
       switchButton.position(700,20)
@@ -1046,12 +1074,12 @@ function draw() {
     bgMusicMenu.stop()
     fill(28,28,28)
     rect(0,0,800,800)
+    eraseButton.hide()
   }
 }
 
 function mousePressed() {
   print(summonCenter)
-  print(inventory)
   if (gamestate == "game") {
       base = ritualBase[ritualShow]+cultistModifiers[cultistShow]
       multiplier = offerMultipliers[offerShow]* greedMultipliers[greedShow]
@@ -1174,19 +1202,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<55) {  
                   zombie1Box.amount++
-                  inventory.push(zombie1Sprite)
               }
               if (randNum>=55 && randNum<90) { 
                   zombie2Box.amount++
-                  inventory.push(zombie2Sprite)
               }
               if (randNum>=90 && randNum<99) { 
                   zombie3Box.amount++
-                  inventory.push(zombie3Sprite)
               }
               if (randNum==100) { 
                   spearBox.amount++
-                  inventory.push(spearSprite)
               }
           } 
           if (score < eggPrices[0]) {
@@ -1218,19 +1242,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   minotaur1Box.amount++
-                  inventory.push(minotaur1Sprite)
               }
               if (randNum>=40 && randNum<75) { 
                   minotaur2Box.amount++
-                  inventory.push(minotaur2Sprite)
               }
               if (randNum>=75 && randNum<95) { 
                   minotaur3Box.amount++
-                  inventory.push(minotaur3Sprite)
               }
               if (randNum>=95) { 
                   skeletonBox.amount++
-                  inventory.push(skeletonSprite)
               }
           } 
           if (score < eggPrices[1]) {
@@ -1262,15 +1282,12 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<50) { 
                   ravenBox.amount++
-                  inventory.push(ravenSprite)
               }
               if (randNum>=50 && randNum<85) { 
                   mushroomBox.amount++
-                  inventory.push(mushroomSprite)
               }
               if (randNum>=85) { 
                   goblinBox.amount++
-                  inventory.push(goblinSprite)
               }
           } 
           if (score < eggPrices[2]) {
@@ -1302,19 +1319,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   goblinBeastBox.amount++
-                  inventory.push(goblinBeastSprite)
               }
               if (randNum>=40 && randNum<70) { 
                   ancientSkeletonBox.amount++
-                  inventory.push(ancientSkeletonSprite)
               }
               if (randNum>=70 && randNum<95) { 
                   goblinRiderBox.amount++
-                  inventory.push(goblinRiderSprite)
               }
               if (randNum>=95) { 
                   necromancerBox.amount++
-                  inventory.push(necromancerSprite)
               }
           } 
           if (score < eggPrices[3]) {
@@ -1346,19 +1359,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   kitsuneBox.amount++
-                  inventory.push(kitsuneSprite)
               }
               if (randNum>=40 && randNum<70) { 
                   eyeBox.amount++
-                  inventory.push(eyeSprite)
               }
               if (randNum>=70 && randNum<95) { 
                   knightBox.amount++
-                  inventory.push(knightSprite)
               }
               if (randNum>=95) { 
                   flareBox.amount++
-                  inventory.push(flareSprite)
               }
           } 
           if (score < eggPrices[4]) {
@@ -1390,19 +1399,15 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   skeletonGeneralBox.amount++
-                  inventory.push(skeletonGeneralSprite)
               }
               if (randNum>=40 && randNum<65) { 
                   plant1Box.amount++
-                  inventory.push(plant1Sprite)
               }
               if (randNum>=65 && randNum<90) { 
                   archerBox.amount++
-                  inventory.push(archerSprite)
               }
               if (randNum>=90) { 
                   skeletonKingBox.amount++
-                  inventory.push(skeletonKingSprite)
               }
           } 
           if (score < eggPrices[5]) {
@@ -1434,15 +1439,12 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   flameBox.amount++
-                  inventory.push(flameSprite)
               }
               if (randNum>=40 && randNum<70) { 
                   lightBox.amount++
-                  inventory.push(lightSprite)
               }
               if (randNum>=70 && randNum<99) { 
                   magicBox.amount++
-                  inventory.push(magicSprite)
               }
           } 
           if (score < eggPrices[6]) {
@@ -2424,6 +2426,9 @@ function mousePressed() {
 
   }
   if (gamestate == "nav") {
+    if (mouseOn == false) {
+      mouseOn = true
+    }
     // TAKE TO SHRINE
     if (mouseX >= 140 && mouseX <= 360 && mouseY >= 60 && mouseY <= 280) {
       gamestate = "game"
@@ -2441,13 +2446,36 @@ function mousePressed() {
     }
 
     // END THE GAME
-    if (mouseX >= 440 && mouseX <= 660 && mouseY >= 320 && mouseY <= 540) {
-      let exitCheck = confirm("ARE YOU SURE YOU WANT TO END THE GAME? YOUR DATA WILL BE SAVED")
-      if (exitCheck) {
-        noStroke()
-        gamestate = "end"
-        noLoop()
-      } 
+    if (mouseX >= 440 && mouseX <= 660 && mouseY >= 320 && mouseY <= 540 && mouseOn == true) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Your data will be saved but all summons in the summon center will fade away.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, take me away!",
+        position: "top-end",
+        
+      }).then((result) => {
+        if (result.isConfirmed) {
+                    noStroke()
+          gamestate = "end"
+          noLoop()
+          Swal.fire({
+            title: "R.I.P 🪦🪦!",
+            text: "You have exited this life.",
+            icon: "success"
+          });
+
+        } else {
+          print("ok")
+          gamestate = "nav"
+          
+          
+        }
+      });
+      
     }
   }
 }
@@ -2709,15 +2737,6 @@ function loadGame() {
     magicSpriteToken = mg
   }
   
-  let i = getItem('inventory')
-  if (i && i.length > 0) {
-      // inventory = i
-  }
-
-  let sc = getItem('summonCenter')
-  if (sc && sc.length > 0) {
-      // summonCenter = sc 
-  }
   zombie1Box.amount = zombie1SpriteToken
   zombie2Box.amount = zombie2SpriteToken
   zombie3Box.amount = zombie3SpriteToken
@@ -2757,12 +2776,15 @@ function loadGame() {
   cultistSprite.size = cultistSprite.image.height
   cultistSprite.totalFrames = cultistSprite.image.width / cultistSprite.image.height
   cultistSprite.frame = 0
+
+
 }
 
 
 function gameDelete() {
   let confirmed = confirm("WAIT! ARE YOU SURE?")
   if (confirmed) {
+//     REMOVES EVERYTHING! ALL PROGRESS
     removeItem("score", score)
     removeItem("ritualShow", ritualShow)
     removeItem("offerShow", offerShow)
@@ -2772,6 +2794,85 @@ function gameDelete() {
     removeItem("tierOffer", tierOffer)
     removeItem("tierCultist", tierCultist)
     removeItem("tierGreed", tierGreed)
+    removeItem("zombie1SpriteToken", zombie1SpriteToken)
+    removeItem("zombie2SpriteToken", zombie2SpriteToken)
+    removeItem("zombie3SpriteToken", zombie3SpriteToken)
+    removeItem("spearSpriteToken", spearSpriteToken)
+    removeItem("minotaur1SpriteToken", minotaur1SpriteToken)
+    removeItem("minotaur2SpriteToken", minotaur2SpriteToken)
+    removeItem("minotaur3SpriteToken", minotaur3SpriteToken)
+    removeItem("skeletonSpriteToken", skeletonSpriteToken)
+    removeItem("ravenSpriteToken", ravenSpriteToken)
+    removeItem("mushroomSpriteToken", mushroomSpriteToken)
+    removeItem("goblinSpriteToken", goblinSpriteToken)
+    removeItem("goblinBeastSpriteToken", goblinBeastSpriteToken)
+    removeItem("ancientSkeletonSpriteToken", ancientSkeletonSpriteToken)
+    removeItem("goblinRiderSpriteToken", goblinRiderSpriteToken)
+    removeItem("necromancerSpriteToken", necromancerSpriteToken)
+    removeItem("kitsuneSpriteToken", kitsuneSpriteToken)
+    removeItem("eyeSpriteToken", eyeSpriteToken)
+    removeItem("knightSpriteToken", knightSpriteToken)
+    removeItem("flareSpriteToken", flareSpriteToken)
+    removeItem("skeletonGeneralSpriteToken", skeletonGeneralSpriteToken)
+    removeItem("plant1SpriteToken", plant1SpriteToken)
+    removeItem("archerSpriteToken", archerSpriteToken)
+    removeItem("skeletonKingSpriteToken", skeletonKingSpriteToken)
+    removeItem("flameSpriteToken", flameSpriteToken)
+    removeItem("lightSpriteToken", lightSpriteToken)
+    removeItem("magicSpriteToken", magicSpriteToken)
+    summonCenter = []
+    zombie1SpriteToken = 0
+    zombie2SpriteToken = 0
+    zombie3SpriteToken = 0
+    spearSpriteToken = 0
+    minotaur1SpriteToken = 0
+    minotaur2SpriteToken = 0
+    minotaur3SpriteToken = 0
+    skeletonSpriteToken = 0
+    ravenSpriteToken = 0
+    mushroomSpriteToken = 0
+    goblinSpriteToken = 0
+    goblinBeastSpriteToken = 0
+    ancientSkeletonSpriteToken = 0
+    goblinRiderSpriteToken = 0
+    necromancerSpriteToken = 0
+    kitsuneSpriteToken = 0
+    eyeSpriteToken = 0
+    knightSpriteToken = 0
+    flareSpriteToken = 0
+    skeletonGeneralSpriteToken = 0
+    plant1SpriteToken = 0
+    archerSpriteToken = 0
+    skeletonKingSpriteToken = 0
+    flameSpriteToken = 0
+    lightSpriteToken = 0
+    magicSpriteToken = 0
+    zombie1Box.amount = 0
+    zombie2Box.amount = 0
+    zombie3Box.amount = 0
+    spearBox.amount = 0
+    minotaur1Box.amount = 0
+    minotaur2Box.amount = 0
+    minotaur3Box.amount = 0
+    skeletonBox.amount = 0
+    ravenBox.amount = 0
+    mushroomBox.amount = 0
+    goblinBox.amount = 0
+    goblinBeastBox.amount = 0
+    ancientSkeletonBox.amount = 0
+    goblinRiderBox.amount = 0
+    necromancerBox.amount = 0
+    kitsuneBox.amount = 0
+    eyeBox.amount = 0
+    knightBox.amount = 0
+    flareBox.amount = 0
+    skeletonGeneralBox.amount = 0
+    plant1Box.amount = 0
+    archerBox.amount = 0
+    skeletonKingBox.amount = 0
+    flameBox.amount = 0
+    lightBox.amount = 0
+    magicBox.amount = 0
     gamestate = "end"
   }  
   
@@ -2882,6 +2983,23 @@ function tokenAdd() {
 }
 }
 
-// TO DOS --
-// erase progress should erase summons
-// resolve confusion between the summon center array and inventory array.
+function toGame() {
+  gamestate = "game"
+}
+function toTutorial() {
+  gamestate = "tutorial"
+}
+function statue1load() {
+  statue1.style('width', (statue1.width / 2.2) + "px")
+  statue1.style('height', (statue1.height / 2.2) + "px")
+  }
+
+  function statue2load() {
+    statue2.style('width', (statue2.width / 2.2) + "px")
+    statue2.style('height', (statue2.height / 2.2) + "px")
+  }
+
+// TO DO:
+// MENU FINISH
+  //tutorial
+  //play
