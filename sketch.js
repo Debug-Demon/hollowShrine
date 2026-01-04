@@ -1,13 +1,68 @@
-// ______________________________________________REFERENCES______________________________________
-// https://editor.p5js.org/mrbombmusic/sketches/eYWdNsYFC => isPlaying
-//  SPRITE SHEETS:
-//                 https://www.youtube.com/watch?v=T-HGdc8L-7w&pp=ygUSY29kaW5nIHRyYWluIGNhbHNz0gcJCTwKAYcqIYzv
-//                 https://www.youtube.com/watch?v=eE65ody9MdI&pp=ygUSc3ByaXRlIHNoZWV0cyBwNWpz
+/*
+  VERSION - 1
+  DATE - 4/1/2026
+  
+  
+  BUGS: 
+    NONE
+  
+  ---------------------------------FUTURE UPGRADES:--------------------------------
+  -MAKE THE GAME BEATABLE:
+      -I WANT TO ADD ANOTHER PHASE TO THE GAME, AFTER SOME TIME OF CLICKING, I WANT THE GAME TO TRANSITION       INTO A STORY BASED GAME THAT REVEALS THE LORE BEHIND THE GAME. ESPECIALLY THE THING TRAPPED IN THE         BLACKHOLE 
+    
+  -MORE SUMMONS
+    -POSSIBLY A NEW RARITY
+    -DEFINITELY THE TITAN SPRITE
+  -POWER UPS.
+    -DOUBLE CLICKS
+    -DOUBLE LUCK
+    -AUTOCLICKER
+  -POSSIBLY ADD A MULTIPLAYER FEATURE
+  -MAKE THE CODE MORE SMALL. USE MORE FOR LOOPS
+  
+  DESCRIPTION - THIS IS A CLICKING GAME SIMILAR TO COOKIE CLICKER BUT WITH MORE LORE AND DIFFERENT FEATURES. YOU HAVE TO CLICK THE SHRINE TO EARN ESSENCE. THEN YOU HAVE TO USE THE ESSENCE FOR UPGRADES OR SUMMONS
+  
+  ______________________________________________REFERENCES______________________________________
+https://editor.p5js.org/mrbombmusic/sketches/eYWdNsYFC => isPlaying
+ SPRITE SHEETS:
+                https://www.youtube.com/watch?v=T-HGdc8L-7w&pp=ygUSY29kaW5nIHRyYWluIGNhbHNz0gcJCTwKAYcqIYzv
+                https://www.youtube.com/watch?v=eE65ody9MdI&pp=ygUSc3ByaXRlIHNoZWV0cyBwNWpz
 
+SPREAD OPERATOR:
+  https://www.youtube.com/watch?v=RuDdltsfaVc
 
-// CUSTOM LOADING SCREEN:
-//   https://stackoverflow.com/questions/77782145/how-to-customize-p5-js-default-loading-animation-in-preload
+CUSTOM LOADING SCREEN:
+  https://stackoverflow.com/questions/77782145/how-to-customize-p5-js-default-loading-animation-in-preload
 
+styles;
+  https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
+----------------------------------------------SELF ASSESMENT----------------------------------------------
+ I BELIEVE THAT IS SOULD GET A FOUR PLUS BECAUSE:
+   -I HAVE A VERY GOOD TUTORIAL THAT IS ENGAGING
+   -I USED A LOT OF LVL 4+ THINGS LIKE:
+     -ARRAYS
+     -CLASSES
+     -IS PLAYING
+     -ADVANCED HTML ELEMENTS MANIPULATION
+     -P5JS MATH (FLOOR)
+     -VARIETY OF SCOPE (LOCAL AND GLOBAL VARIABLES)
+     -CURSORS
+     -2D ARRAYS (I USED SPREAD, ..., INSTEAD OF THE METHOD ON BRIGHTSPACE BECAUSE I FIND THIS EASIER)
+     -LIBRARIES
+     -CUSTOM LOADING SCREEN
+     -LOCAL STORAGE
+  -I ALSO BELIEVE THAT MY CODE IS, MOSTLY, EASY TO READ HOWEVER THERE ARE SOME REPETITIVE PARTS I DIDN'T KNOW WHAT TO DO WITH.
+  - MY GAME IS FUN
+  - THERE IS LORE
+  - THERE IS A LUCK BASED ELEMENT WHICH MAKES IT MORE FUN
+  - IT ISN'T A DIRECT COPY OF COOKIE CLICKER
+  - IT IS AN ORIGINAL COMBINATION
+  - I USED A WIDE VARIETY OF DIFFERENT CODING ELEMENTS LIKE LOOPS, CONDITIONAL STATEMENTS, LOCAL STORAGE, BUILT IN P5JS FUNCTIONS.
+  -MUSIC IS THERE
+  -THERE ARE ANIMATED COMPONENTS
+     
+      
+*/
 
 // ______________________________________VARIABLES_________________________
 
@@ -70,7 +125,18 @@ let ritualT1Sound, ritualT2Sound, ritualT3Sound, ritualT4Sound, ritualT5Sound, r
 // Menu stuff
 let menuBg
 
+// TUTORIAL
+let tArrayMark
+let tArray
+let  t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19,t20,t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36,t37,t38
+
+let tClick
+let tMusic
+
+
 // Buttons
+
+let settings
 
 let optionsButton
 let playButton
@@ -216,6 +282,30 @@ let eggNames
 
 
 // ---------------------------------------------CLASSES ------------------------------------------------
+/*      CLASS HEADER
+
+CLASS NAME: 
+-Sprite
+
+DESCRIPTION:
+-This class handles sprite sheet animations. 
+- It allows an image sprite sheet with multiple square frames to be animated by going through the frames.
+
+ARGUMENTS (constructor):
+- sheet: p5.Image → The sprite sheet image.
+- x: number → The x-coordinate where the animation will be.
+- y: number → The y-coordinate where the animation will be.
+- scale: number → The scale factor to resize the sprite frames.
+
+METHODS:
+- make(): Draws the current frame of the sprite on the canvas and advances the frames for animation.
+RETURNS:
+-none
+
+
+
+*/
+
 class Sprite { // sprite sheet animation
   constructor(sheet, x, y, scale) {
     this.image = sheet   // the image
@@ -248,7 +338,26 @@ class Sprite { // sprite sheet animation
     }
   }
 }
+/*      CLASS HEADER
 
+CLASS NAME: 
+-InventoryBox
+
+DESCRIPTION:
+-creates boxes in which the animation will play for the summons
+ARGUMENTS (constructor):
+- x: number → The x-coordinate where the animation will be.
+- y: number → The y-coordinate where the animation will be.
+- sprite: image → the sprite class duplicates.
+
+METHODS:
+- make(): Draws the current frame of the sprite in the box and advances the frame for animation.
+RETURNS:
+-none
+
+
+
+*/
 class InventoryBox {
   constructor(x, y, sprite) {
     this.x = x
@@ -318,8 +427,49 @@ function preload() {
   menuBg = loadImage("menuBG.gif")
   playsButton = loadImage("playPNG.png")
   statue = loadImage("statue.png")
-
+//   TUTORIAL IMAGES
+  t1  = loadImage("t1.gif")
+  t2  = loadImage("t2.gif")
+  t3  = loadImage("t3.gif")
+  t4  = loadImage("t4.gif")
+  t5  = loadImage("t5.jpg")
+  t6  = loadImage("t6.jpg")
+  t7  = loadImage("t7.gif")
+  t8  = loadImage("t8.jpg")
+  t9  = loadImage("t9.jpg")
+  t10 = loadImage("t10.gif")
+  t11 = loadImage("t11.jpg")
+  t12 = loadImage("t12.jpg")
+  t13 = loadImage("t13.jpg")
+  t14 = loadImage("t14.jpg")
+  t15 = loadImage("t15.jpg")
+  t16 = loadImage("t16.jpg")
+  t17 = loadImage("t17.gif")
+  t18 = loadImage("t18.jpg")
+  t19 = loadImage("t19.jpg")
+  t20 = loadImage("t20.jpg")
+  t21 = loadImage("t21.jpg")
+  t22 = loadImage("t22.jpg")
+  t23 = loadImage("t23.jpg")
+  t24 = loadImage("t24.gif")
+  t25 = loadImage("t25.gif")
+  t26 = loadImage("t26.jpg")
+  t27 = loadImage("t27.jpg")
+  t28 = loadImage("t28.gif")
+  t29 = loadImage("t29.jpg")
+  t30 = loadImage("t30.jpg")
+  t31 = loadImage("t31.jpg")
+  t32 = loadImage("t32.jpg")
+  t33 = loadImage("t33.jpg")
+  t34 = loadImage("t34.jpg")
+  t35 = loadImage("t35.jpg")
+  t36 = loadImage("t36.jpg")
+  t37 = loadImage("t37.gif")
+  t38 = loadImage("t38.gif")
   
+// tutorial sound
+  tMusic = loadSound("tutorialBgMusic.m4a")
+  tClick = loadSound("tClick.mp3")
   
   //   fonts
   essenceFont = loadFont("FEASFBRG.TTF")
@@ -333,7 +483,19 @@ function preload() {
   //   buttons
   eraseButton = createButton("ERASE PROGRESS")
   switchButton.hide()
-  eraseButton.hide()
+  switchButton.style('background-color', '#1a1a1a') // bg color
+  switchButton.style('color', '#f5f5f5') // text color
+  switchButton.style('font-family', 'monospace') // font
+  switchButton.style('font-size', '12px') // size
+  switchButton.style('border', '2px solid #660000') //border: thickness, type, color
+  switchButton.style('border-radius', '4px') // curvature
+  switchButton.style('padding', '10px 20px') // space around text (box size)
+  switchButton.style('cursor', 'pointer') // cursor
+
+// hover effect using mouseOver and mouseOut
+  switchButton.mouseOver(hover)
+  switchButton.mouseOut(notHover)
+
 
   
 //   music
@@ -361,6 +523,10 @@ function preload() {
   T8idleSheet = loadImage("cultistT8idle.png")
   T9idleSheet = loadImage("cultistT9idle.png")
   T10idleSheet = loadImage("cultistT10idle.png")
+  
+//   SHOP SOUNDS
+  shopBgMusic = loadSound("shopBG.mp3")
+  fire = loadSound("fire.mp3")
 //   --------------------SUMMONS----------------------------
     // COMMON
   zombie1 = loadImage("zombie1.png")
@@ -408,11 +574,11 @@ function preload() {
 }
 
 function setup() {  
-  
+  tArrayMark = 0
   createCanvas(800, 800)
   switchButton.show()
   eraseButton.show()
-  score = 100000000000
+  score = 0
   eraseButton.mousePressed(gameDelete)
   switchButton.mousePressed(toNav)
   base = 1
@@ -423,28 +589,8 @@ function setup() {
   greedMultiplier = 1
   cultistModifier = 0
   bestCursor = cursorT1
-  statue1 = createImg("statue.png", "",statue1load())
-  statue2 = createImg("statue.png", "", statue2load())
-  playText = createP("PLAY")
-  tutorialText = createP("TUTORIAL")
-  statue1.style('z-index', 0)
-  statue1.position(0, 100)
-  statue1.mousePressed(toGame)
-  textSize(20)
-  playText.position(80,120)
-  playText.style('z-index', 1)
-  statue2.style('z-index', 0)
-  statue2.position(550, 100)
-  statue2.mousePressed(toTutorial)
-  textSize(20)
-  tutorialText.position(615,120)
-  tutorialText.style('z-index', 1)
   bgMusicShrine.stop()
-  switchButton.hide()
-  playText.hide()
-  tutorialText.hide()
-  statue1.hide()
-  statue2.hide()
+  
   gamestate = "menu"
   substate = "center"
   summonCenter = []
@@ -456,6 +602,18 @@ function setup() {
   offerShow = 1 
   cultistShow = 1 
   greedShow = 1
+  
+  
+  statue1 = createImg("statue.png", "")
+  statue2 = createImg("statue.png", "")
+  settings = createImg("settings-1.gif", '')
+  playText = createP("PLAY")
+  tutorialText = createP("TUTORIAL")
+  settings.hide()
+  statue1.hide()
+  playText.hide()
+  statue2.hide()
+  tutorialText.hide()
   
     zombie1SpriteToken = 0
   zombie2SpriteToken = 0
@@ -522,10 +680,19 @@ function setup() {
   cultistSpriteArray = [0, T1idleSheet, T2idleSheet, T3idleSheet, T4idleSheet, T5idleSheet, T6idleSheet, T7idleSheet, T8idleSheet, T9idleSheet, T10idleSheet]
 //         SOUND ARRAYS
   ritualSoundArray = [0,ritualT1Sound, ritualT2Sound, ritualT3Sound, ritualT4Sound, ritualT5Sound, ritualT6Sound, ritualT7Sound, ritualT8Sound, ritualT9Sound, ritualT10Sound]
-  
+//   summon Center
   summonCenter = []
-  maxCenter = 3 //max amount in summon center
-// *********************************NEW CLASS******************************************
+  eggPrices = [100, 500, 1000, 5000, 10000, 50000, 100000]
+  eggShow = [100, 500, "1k", "5k", "10k", "50k", "100k"]
+//       nested array to store colors
+  eggColors = [[200, 50, 50], [200, 70, 70], [200, 90, 90], [200, 110, 110], [200, 130, 130], [200, 150, 150], [200, 170, 170] ]
+
+  eggNames = ["Common", "Uncommon", "Rare", "Legendary", "Mythic", "Godly", "Forbidden"]
+  maxCenter = 3 //max amount in summon center 
+  
+//   TUTORIAL:
+  tArray = [t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19,t20,t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36,t37,t38]
+// *********************************NEW CLASS ******************************************
   cultistSprite = new Sprite(cultistSpriteArray[offerShow], 20, 350, 3)
   // COMMON
   zombie1Sprite = new Sprite(zombie1, 1)
@@ -627,7 +794,7 @@ function draw() {
         cursor(AUTO)
       }
       switchButton.show()
-      switchButton.position(700,20)
+      switchButton.position(10,20)
       background(40, 0, 0) 
       fill(28,28,28)
       rect(0,600,800,600)
@@ -763,127 +930,39 @@ function draw() {
 
 
       // ---------------- EGGS ----------------
-      eggPrices = [100, 500, 1000, 5000, 10000, 50000, 100000]
-      eggNames = ["Common", "Uncommon", "Rare", "Legendary", "Mythic", "Godly", "Forbidden"]
+      
 
-      // Egg 1
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(8, 400, 90, 110, 15)
-      fill(200, 50, 50)
-      noStroke()
-      circle(53, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[0], 36, 410)
-      textSize(14)
-      text(eggPrices[0] + " Essence",25, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 43, 495)
+      let startX = 8
+      let y = 400
+      let spacing = 115   // distance between eggs
 
-      // Egg 2
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(125, 400, 90, 110, 15)
-      fill(200, 70, 70)
-      noStroke()
-      circle(170, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[1], 153, 410)
-      textSize(14)
-      text(eggPrices[1] + " Essence", 142, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 170, 495)
+      for (let i = 0; i < eggNames.length; i++) {
+        let x = startX + i * spacing
+        let centerX = x + 45
 
-      // Egg 3
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(242, 400, 90, 110, 15)
-      fill(200, 90, 90)
-      noStroke()
-      circle(287, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[2], 275, 410)
-      textSize(14)
-      text(eggPrices[2] + " Essence", 249, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 287, 495)
+        // Box
+        fill(80, 0, 0, 200)
+        stroke(180, 0, 0)
+        strokeWeight(3)
+        rect(x, y, 90, 110, 15)
 
-      // Egg 4
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(359, 400, 90, 110, 15)
-      fill(200, 110, 110)
-      noStroke()
-      circle(404, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[3], 387, 410)
-      textSize(14)
-      text(eggPrices[3] + " Essence", 366, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 404, 495)
+        // Circle
+        fill(... eggColors[i]) //"unwraps" the color storage
+        noStroke()
+        circle(centerX, y + 40, 50)
 
-      // Egg 5
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(476, 400, 90, 110, 15)
-      fill(200, 130, 130)
-      noStroke()
-      circle(521, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[4], 504, 410)
-      textSize(14)
-      text(eggPrices[4] + " Essence", 483, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 521, 495)
+        // Text
+        fill(255)
+        textSize(12)
+        text(eggNames[i], x + 28, y + 10)
 
-      // Egg 6
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(593, 400, 90, 110, 15)
-      fill(200, 150, 150)
-      noStroke()
-      circle(638, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[5], 621, 410)
-      textSize(14)
-      text(eggPrices[5] + " Essence", 600, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 638, 495)
+        textSize(14)
+        text(eggShow[i] + " Essence", x + 14, y + 80)
 
-      // Egg 7
-      fill(80, 0, 0, 200)
-      stroke(180, 0, 0)
-      strokeWeight(3)
-      rect(710, 400, 90, 110, 15)
-      fill(200, 170, 170)
-      noStroke()
-      circle(755, 440, 50)
-      fill(255)
-      textSize(12)
-      text(eggNames[6], 738, 410)
-      textSize(14)
-      text(eggPrices[6] + " Essence", 713, 480)
-      textSize(12)
-      fill(200)
-      text("x1", 755, 495)
+        textSize(12)
+        fill(200)
+        text("x1", centerX - 5, y + 95)
+      }
 
       // Footer
       textSize(16)
@@ -940,13 +1019,36 @@ function draw() {
     }
   }
 
-  
+    
+    if (gamestate !== "menu") {
+      statue1.hide()
+      playText.hide()
+      statue2.hide()
+      tutorialText.hide()
+      bgMusicMenu.stop()
+    }
 
 
     if (gamestate == "menu") {
-      
+      statue1.show()
+      playText.show()
+      statue2.show()
+      tutorialText.show()
+      statue1.size(468/2.2, 705/2.2)
+      statue1.style('z-index', 0)
+      statue1.position(0, 100)
+      statue1.mousePressed(toGame)
+      textSize(20)
+      playText.position(80,120)
+      playText.style('z-index', 1)
+      statue2.size(468/2.2, 705/2.2)
+      statue2.style('z-index', 0)
+      statue2.position(550, 100)
+      statue2.mousePressed(toTutorial)
+      textSize(20)
+      tutorialText.position(615,120)
+      tutorialText.style('z-index', 1)
       scale(1.3)
-
       image(menuBg, 0,0, menuBg.width, 400)
       scale(1/1.3)
       statue1.show()
@@ -961,11 +1063,68 @@ function draw() {
       } else {
         bgMusicMenu.play()
       }
-      scale(0.5)
-      scale(2.7)
-      scale(1/2.7)
+
 
     }
+  
+    if (gamestate !== "tutorial" && gamestate!== "menu" && gamestate !== "nav") {
+      settings.show()
+      settings.position(760,20)
+      settings.size(40,40)
+      settings.mouseOver(settingsHover)
+      settings.mousePressed(toSettings)
+    } else{
+      settings.hide()
+    }
+  
+    if (gamestate == "tutorial") {
+      
+      if (tMusic.isPlaying()) {
+
+      } else {
+        tMusic.play()
+      }
+      
+      switchButton.hide()
+      switchButton.position(10,20)
+      image(tArray[tArrayMark],0,0,800,600)
+     
+      
+    } else{
+      tMusic.stop()
+    }
+  
+    if (gamestate == "settings") {
+      eraseButton.show()
+      settings.hide()
+      noStroke()
+      fill(245,20,53,1)
+      rect(0,0,800,800)
+      stroke(180, 180, 220)      
+      strokeWeight(6)
+      fill(40, 10, 60, 220)      
+      rect(100, 50, 600, 500, 20)
+      fill(200, 0, 0)
+      stroke(120, 0, 0)
+      strokeWeight(3)
+
+      
+      eraseButton.position(140,85)
+      eraseButton.size(520,440)
+      eraseButton.style("font-size", "60px")
+      eraseButton.style('background-color', '#1a1a1a') // bg color
+      eraseButton.style('color', '#f5f5f5') // text color
+      eraseButton.style('font-family', 'monospace') // font
+      eraseButton.style('border', '2px solid #660000') //border: thickness, type, color
+      eraseButton.style('border-radius', '4px') // curvature
+      eraseButton.style('padding', '10px 20px') // space around text (box size)
+      eraseButton.style('cursor', 'pointer') // cursor
+      eraseButton.mouseOver(eraseHover)
+      eraseButton.mouseOut(eraseNotHover)
+    } else{
+      eraseButton.hide()
+    }
+
     if (gamestate == "game") {
       statue1.hide()
       playText.hide()
@@ -973,7 +1132,7 @@ function draw() {
       tutorialText.hide()
       bgMusicMenu.stop()
       switchButton.show()
-      switchButton.position(700,20)
+      switchButton.position(10,20)
 
       if (bgMusicShrine.isPlaying()) {
 
@@ -998,14 +1157,32 @@ function draw() {
       }
       else {cursor(AUTO)}
     }
+  if (gamestate !== "shop" && gamestate !== "nav") {
+    shopBgMusic.stop()
+    fire.stop()
+  }
   // what to do if its in the shop stage
     if (gamestate == "shop") {
+      if (shopBgMusic.isPlaying()) {
+        
+      } else {
+        shopBgMusic.play()
+      }
+      
+      if (fire.isPlaying()) {
+        
+      } else {
+        fire.play()
+      }
+      
+      
       fill(28,28,28)
       rect(0,600,800,600)
       noStroke()
       fill(28,28,28)
       switchButton.show()
-      switchButton.position(700,20)
+      
+      switchButton.position(10,20)
       bgMusicShrine.stop()
       bgMusicMenu.stop()
 
@@ -1069,17 +1246,20 @@ function draw() {
     text("Summons", 210, 430) // bottom-left
     text("Out of this Life", 500, 430) // bottom-right
     }
+
   if (gamestate == "end") {
+    noStroke()
+    settings.hide()
     bgMusicShrine.stop()
     bgMusicMenu.stop()
     fill(28,28,28)
     rect(0,0,800,800)
     eraseButton.hide()
+    switchButton.hide()
   }
 }
 
 function mousePressed() {
-  print(summonCenter)
   if (gamestate == "game") {
       base = ritualBase[ritualShow]+cultistModifiers[cultistShow]
       multiplier = offerMultipliers[offerShow]* greedMultipliers[greedShow]
@@ -1184,8 +1364,6 @@ function mousePressed() {
         cursor(AUTO)
         substate = "inventory"
       }
-      print(score)
-
       // EGG 1 - COMMON
       if (mouseX >= 8 && mouseX <= 98 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[0]) {
@@ -2425,6 +2603,15 @@ function mousePressed() {
 
 
   }
+  
+  if (gamestate == "tutorial") {
+    if(tArrayMark<=36) {
+    tArrayMark++
+      } else {
+        gamestate = "game"
+      }
+    tClick.play()
+  }
   if (gamestate == "nav") {
     if (mouseOn == false) {
       mouseOn = true
@@ -2459,20 +2646,16 @@ function mousePressed() {
         
       }).then((result) => {
         if (result.isConfirmed) {
-                    noStroke()
+          noStroke()
           gamestate = "end"
           noLoop()
           Swal.fire({
-            title: "R.I.P 🪦🪦!",
+            title: "Ascension",
             text: "You have exited this life.",
-            icon: "success"
-          });
 
+          });
         } else {
-          print("ok")
           gamestate = "nav"
-          
-          
         }
       });
       
@@ -2983,23 +3166,136 @@ function tokenAdd() {
 }
 }
 
-function toGame() {
+/* FUNCTION HEADER
+  
+FUNCTION NAME: HOVER
+  
+DESCRIPTION: it changes the style of the travel button when mouse is over it
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
+function hover() {
+  switchButton.style('background-color', '#2b0000') //color of button
+  switchButton.style('box-shadow', '0 0 10px #ff3333') // color of shadow
+  switchButton.style('transform', 'scale(1.05)') // scales
+}
+/* FUNCTION HEADER
+  
+FUNCTION NAME:notHover
+  
+DESCRIPTION: it reverts back to the original styling of the travel button when mouse is taken off
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
+function notHover() {
+  switchButton.style('background-color', '#1a1a1a') // color of buttton
+  switchButton.style('box-shadow', '0 0 5px #660000') // color of shadow
+  switchButton.style('transform', 'scale(1)') // scales
+}
+/* FUNCTION HEADER
+  
+FUNCTION NAME: toGame
+  
+DESCRIPTION:changes gamestate to game
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
+function toGame () {
   gamestate = "game"
 }
+/* FUNCTION HEADER
+  
+FUNCTION NAME:toTutorial
+  
+DESCRIPTION: changes gamestate to tutorial
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
 function toTutorial() {
   gamestate = "tutorial"
 }
-function statue1load() {
-  statue1.style('width', (statue1.width / 2.2) + "px")
-  statue1.style('height', (statue1.height / 2.2) + "px")
-  }
+/* FUNCTION HEADER
+  
+FUNCTION NAME: toSettings
+  
+DESCRIPTION: changes gamestate to setting
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
+function toSettings() {
+  gamestate = "settings"
+}
+/* FUNCTION HEADER
+  
+FUNCTION NAME:settingsHover
+  
+DESCRIPTION: changes the curson when the mouse is over the settngs button
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
 
-  function statue2load() {
-    statue2.style('width', (statue2.width / 2.2) + "px")
-    statue2.style('height', (statue2.height / 2.2) + "px")
-  }
+function settingsHover() {
+  settings.style("cursor", "pointer")
+}
+/* FUNCTION HEADER
+  
+FUNCTION NAME: eraseHover
+  
+DESCRIPTION: changes the style when mouse is over the erase progress button
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
+function eraseHover() {
+  eraseButton.style('background-color', '#2b0000') //color of button
+  eraseButton.style('box-shadow', '0 0 10px #ff3333') // color of shadow
+  eraseButton.style('transform', 'scale(1.05)') // scales
+}
+/* FUNCTION HEADER
+  
+FUNCTION NAME: eraseNotHover
+  
+DESCRIPTION: reverts back to original style when not on erase button
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
+function eraseNotHover() {
+  eraseButton.style('background-color', '#1a1a1a') // color of buttton
+  eraseButton.style('box-shadow', '0 0 5px #660000') // color of shadow
+  eraseButton.style('transform', 'scale(1)') // scales
+}
 
-// TO DO:
-// MENU FINISH
-  //tutorial
-  //play
+
+// to do:
+  //programme header
