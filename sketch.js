@@ -839,94 +839,94 @@ function draw() {
         s.frame += 0.1
         if (s.frame >= s.totalFrames) {
           s.frame = 0
-        }
+        } // end frame loop
         //COMMON
         if (summonCenter[i] == zombie1Sprite) {
           multiplierBoost = multiplier *1.05
-        }
+        } // end summon bonus
         if (summonCenter[i] == zombie2Sprite) {
           multiplierBoost = multiplier *1.06
-        }
+        } // end summon bonus
         if (summonCenter[i] == zombie3Sprite) {
           multiplierBoost = multiplier *1.07
-        }
+        } // end summon bonus
         if (summonCenter[i] == spearSprite) {
           multiplierBoost = multiplier *1.08
-        }
+        } // end summon bonus
         // UNCOMMON
         if (summonCenter[i] == minotaur1Sprite) {
           multiplierBoost = multiplier *1.15
-        }
+        } // end summon bonus
         if (summonCenter[i] == minotaur2Sprite) {
           multiplierBoost = multiplier *1.17
-        }
+        } // end summon bonus
         if (summonCenter[i] == minotaur3Sprite) {
           multiplierBoost = multiplier *1.19
-        }
+        } // end summon bonus
         if (summonCenter[i] == skeletonSprite) {
           multiplierBoost = multiplier * 1.2
-        }
+        } // end summon bonus
         // RARE
         if (summonCenter[i] == ravenSprite) {
           baseAdd+=3
-        }
+        } // end summon bonus
         if (summonCenter[i] == mushroomSprite) {
           baseAdd+=4      
-        }
+        } // end summon bonus
         if (summonCenter[i] == goblinSprite) {
           baseAdd+=5
-        }
+        } // end summon bonus
 
         if (summonCenter[i] == goblinBeastSprite) {
           multiplierBoost = multiplier*4
-        }
+        } // end summon bonus
         if (summonCenter[i] == ancientSkeletonSprite) {
           multiplierBoost = multiplier*4.5
-        }
+        } // end summon bonus
         if (summonCenter[i] == goblinRiderSprite) {
           multiplierBoost = multiplier*4.6
-        }
+        } // end summon bonus
         if (summonCenter[i] == necromancerSprite) {
           multiplierBoost = multiplier*4.7
-        }
+        } // end summon bonus
 
         if (summonCenter[i] == kitsuneSprite) {
           multiplierBoost = multiplier * 6
-        }
+        } // end summon bonus
         if (summonCenter[i] == eyeSprite) {
           multiplierBoost = multiplier * 7
-        }
+        } // end summon bonus
         if (summonCenter[i] == knightSprite) {
           multiplierBoost = multiplier * 9 
-        }
+        } // end summon bonus
         if (summonCenter[i] == flareSprite) {
           multiplierBoost = multiplier * 10
-        }
+        } // end summon bonus
 
         if (summonCenter[i] == skeletonGeneralSprite) {
           multiplierBoost = multiplier*10
-        }
+        } // end summon bonus
         if (summonCenter[i] == plant1Sprite) {
           multiplierBoost = multiplier*15
-        }
+        } // end summon bonus
         if (summonCenter[i] == archerSprite) {
           multiplierBoost = multiplier*20
-        }
+        } // end summon bonus
         if (summonCenter[i] == skeletonKingSprite) {
           multiplierBoost = multiplier*25
-        }
+        } // end summon bonus
 
         if (summonCenter[i] == flameSprite) {
           baseAdd+= 10
-        }
+        } // end summon bonus
         if (summonCenter[i] == lightSprite) {
           baseAdd+= 16
-        }
+        } // end summon bonus
         if (summonCenter[i] == magicSprite) {
           baseAdd+= 17
-        }
+        } // end summon bonus
 
-      }
+      } // end summon center loop
 
 
       // ---------------- EGGS ----------------
@@ -962,14 +962,14 @@ function draw() {
         textSize(12)
         fill(200)
         text("x1", centerX - 5, y + 95)
-      }
+      } // end egg list loop
 
       // Footer
       textSize(16)
       fill(200)
       text("Click an egg to summon a unit!", 315, 550)
 
-  }
+  } // end summon center state
     if(substate == "inventory") {
       tokenAdd()
       fill(28,28,28)
@@ -1016,8 +1016,8 @@ function draw() {
       flameBox.make()
       lightBox.make()
       magicBox.make()
-    }
-  }
+    } // end inventory state
+  } // end summon state
 
     
     if (gamestate !== "menu") {
@@ -1026,7 +1026,7 @@ function draw() {
       statue2.hide()
       tutorialText.hide()
       bgMusicMenu.stop()
-    }
+    } // end non-menu state
 
 
     if (gamestate == "menu") {
@@ -1062,10 +1062,10 @@ function draw() {
 
       } else {
         bgMusicMenu.play()
-      }
+      } // end menu music toggle
 
 
-    }
+    } // end menu state
   
     if (gamestate !== "tutorial" && gamestate!== "menu" && gamestate !== "nav") {
       settings.show()
@@ -1075,7 +1075,7 @@ function draw() {
       settings.mousePressed(toSettings)
     } else{
       settings.hide()
-    }
+    } // end settings toggle
   
     if (gamestate == "tutorial") {
       
@@ -1083,7 +1083,7 @@ function draw() {
 
       } else {
         tMusic.play()
-      }
+      } // end tutorial music toggle
       
       switchButton.hide()
       switchButton.position(10,20)
@@ -1092,7 +1092,7 @@ function draw() {
       
     } else{
       tMusic.stop()
-    }
+    } // end tutorial state
   
     if (gamestate == "settings") {
       eraseButton.show()
@@ -1123,7 +1123,7 @@ function draw() {
       eraseButton.mouseOut(eraseNotHover)
     } else{
       eraseButton.hide()
-    }
+    } // end settings state
 
     if (gamestate == "game") {
       statue1.hide()
@@ -1138,7 +1138,7 @@ function draw() {
 
       } else {
         bgMusicShrine.play()
-      }
+      } // end shrine music toggle
       background(28,28,28)
 
       image(shrineBg, 0, 0, 800, 600)
@@ -1155,25 +1155,25 @@ function draw() {
         image(cursorArray[ritualShow], mouseX, mouseY, 50,50)    
 
       }
-      else {cursor(AUTO)}
-    }
+      else {cursor(AUTO)} // end shrine hover
+    } // end game state
   if (gamestate !== "shop" && gamestate !== "nav") {
     shopBgMusic.stop()
     fire.stop()
-  }
+  } // end non-shop state
   // what to do if its in the shop stage
     if (gamestate == "shop") {
       if (shopBgMusic.isPlaying()) {
         
       } else {
         shopBgMusic.play()
-      }
+      } // end shop music toggle
       
       if (fire.isPlaying()) {
         
       } else {
         fire.play()
-      }
+      } // end fire loop
       
       
       fill(28,28,28)
@@ -1212,7 +1212,7 @@ function draw() {
       text("NEXT TIER GREED", 515, 460)
       text("TIER   " + tierGreed, 565, 490)
       text("Price " + greedPrices[greedShow], 565,520 )
-    }
+    } // end shop state
   
   if (gamestate == "nav") {
     noStroke()
@@ -1245,7 +1245,7 @@ function draw() {
     text("Shop", 530, 170) // top-right
     text("Summons", 210, 430) // bottom-left
     text("Out of this Life", 500, 430) // bottom-right
-    }
+    } // end nav state
 
   if (gamestate == "end") {
     noStroke()
@@ -1256,8 +1256,8 @@ function draw() {
     rect(0,0,800,800)
     eraseButton.hide()
     switchButton.hide()
-  }
-}
+  } // end endgame state
+} // end draw
 
 function mousePressed() {
   if (gamestate == "game") {
@@ -1269,8 +1269,8 @@ function mousePressed() {
       score = score+scoreAdd
       ritualSoundArray[ritualShow].play()
       saveGame()
-    }
-  }
+    } // end shrine click
+  } // end game state
 
   if (gamestate == "shop") {
 
@@ -1292,9 +1292,9 @@ function mousePressed() {
           tierRitual = "MAX"
           ritualShow=10
           saveGame()
-        }
-      }
-    }
+        } // end max ritual
+      } // end ritual purchase
+    } // end ritual click
 //     offering upgrade
     if (mouseX >= 498 && mouseX <= 700 && mouseY >= 98 && mouseY<=214) {
       // OFFER PURCHASE
@@ -1310,9 +1310,9 @@ function mousePressed() {
           tierOffer = "MAX"
           saveGame()
           
-        }
-      }
-    }
+        } // end max offer
+      } // end offer purchase
+    } // end offer click
 //     cultist upgrade
     if (mouseX >= 68 && mouseX <= 323 && mouseY >= 400 && mouseY<=500) {
       // CULTIST PURCHASE
@@ -1332,9 +1332,9 @@ function mousePressed() {
         if (tierCultist == 10) {
           tierCultist = "MAX"
           saveGame()
-        }
-      }
-    }
+        } // end max cultist
+      } // end cultist purchase
+    } // end cultist click
 //  greed upgrade
     if (mouseX >= 498 && mouseX <= 700 && mouseY >= 400 && mouseY<=500) {
       // GREED PURCHASE
@@ -1349,10 +1349,10 @@ function mousePressed() {
         if (tierGreed == 10) {
           tierGreed = "MAX"
           saveGame()
-        }
-      }
-    }
-  }
+        } // end max greed
+      } // end greed purchase
+    } // end greed click
+  } // end shop state
   
   
   if (gamestate == "summon") {
@@ -1363,7 +1363,7 @@ function mousePressed() {
       if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
         cursor(AUTO)
         substate = "inventory"
-      }
+      } // end center click
       // EGG 1 - COMMON
       if (mouseX >= 8 && mouseX <= 98 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[0]) {
@@ -1380,17 +1380,17 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<55) {  
                   zombie1Box.amount++
-              }
+              } // end roll
               if (randNum>=55 && randNum<90) { 
                   zombie2Box.amount++
-              }
+              } // end roll
               if (randNum>=90 && randNum<99) { 
                   zombie3Box.amount++
-              }
+              } // end roll
               if (randNum==100) { 
                   spearBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[0]) {
               Swal.fire({
                   toast: true,
@@ -1401,8 +1401,8 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      }
+          } // end insufficient check
+      } // end egg click
 
       // EGG 2 - UNCOMMON
       if (mouseX >= 125 && mouseX <= 215 && mouseY >= 400 && mouseY <= 510) {
@@ -1420,17 +1420,17 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   minotaur1Box.amount++
-              }
+              } // end roll
               if (randNum>=40 && randNum<75) { 
                   minotaur2Box.amount++
-              }
+              } // end roll
               if (randNum>=75 && randNum<95) { 
                   minotaur3Box.amount++
-              }
+              } // end roll
               if (randNum>=95) { 
                   skeletonBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[1]) {
               Swal.fire({
                   toast: true,
@@ -1441,8 +1441,8 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      }
+          } // end insufficient check
+      } // end egg click
 
       // EGG 3 - RARE
       if (mouseX >= 242 && mouseX <= 332 && mouseY >= 400 && mouseY <= 510) {
@@ -1460,14 +1460,14 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<50) { 
                   ravenBox.amount++
-              }
+              } // end roll
               if (randNum>=50 && randNum<85) { 
                   mushroomBox.amount++
-              }
+              } // end roll
               if (randNum>=85) { 
                   goblinBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[2]) {
               Swal.fire({
                   toast: true,
@@ -1478,8 +1478,8 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      }
+          } // end insufficient check
+      } // end egg click
 
       // EGG 4 - LEGENDARY
       if (mouseX >= 359 && mouseX <= 449 && mouseY >= 400 && mouseY <= 510) {
@@ -1497,17 +1497,17 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   goblinBeastBox.amount++
-              }
+              } // end roll
               if (randNum>=40 && randNum<70) { 
                   ancientSkeletonBox.amount++
-              }
+              } // end roll
               if (randNum>=70 && randNum<95) { 
                   goblinRiderBox.amount++
-              }
+              } // end roll
               if (randNum>=95) { 
                   necromancerBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[3]) {
               Swal.fire({
                   toast: true,
@@ -1518,8 +1518,8 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      }
+          } // end insufficient check
+      } // end egg click
 
       // EGG 5 - MYTHIC
       if (mouseX >= 476 && mouseX <= 566 && mouseY >= 400 && mouseY <= 510) {
@@ -1537,17 +1537,17 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   kitsuneBox.amount++
-              }
+              } // end roll
               if (randNum>=40 && randNum<70) { 
                   eyeBox.amount++
-              }
+              } // end roll
               if (randNum>=70 && randNum<95) { 
                   knightBox.amount++
-              }
+              } // end roll
               if (randNum>=95) { 
                   flareBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[4]) {
               Swal.fire({
                   toast: true,
@@ -1558,8 +1558,8 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      }
+          } // end insufficient check
+      } // end egg click
 
       // EGG 6 - GODLY
       if (mouseX >= 593 && mouseX <= 683 && mouseY >= 400 && mouseY <= 510) {
@@ -1577,17 +1577,17 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   skeletonGeneralBox.amount++
-              }
+              } // end roll
               if (randNum>=40 && randNum<65) { 
                   plant1Box.amount++
-              }
+              } // end roll
               if (randNum>=65 && randNum<90) { 
                   archerBox.amount++
-              }
+              } // end roll
               if (randNum>=90) { 
                   skeletonKingBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[5]) {
               Swal.fire({
                   toast: true,
@@ -1598,8 +1598,8 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      }
+          } // end insufficient check
+      } // end egg click
 
       // EGG 7 - FORBIDDEN
       if (mouseX >= 710 && mouseX <= 800 && mouseY >= 400 && mouseY <= 510) {
@@ -1617,14 +1617,14 @@ function mousePressed() {
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<40) { 
                   flameBox.amount++
-              }
+              } // end roll
               if (randNum>=40 && randNum<70) { 
                   lightBox.amount++
-              }
+              } // end roll
               if (randNum>=70 && randNum<99) { 
                   magicBox.amount++
-              }
-          } 
+              } // end roll
+          } // end purchase check
           if (score < eggPrices[6]) {
               Swal.fire({
                   toast: true,
@@ -1635,11 +1635,11 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
-          }
-      } // egg 7 end here
+          } // end insufficient check
+      } // end egg click
 
 
-    } 
+    } // end summon center state
     if (substate == "inventory") {
       saveGame()
       
@@ -2599,38 +2599,38 @@ function mousePressed() {
       }
 
 
-    }
+    } // end inventory state
 
 
-  }
+  } // end summon state
   
   if (gamestate == "tutorial") {
     if(tArrayMark<=36) {
     tArrayMark++
       } else {
         gamestate = "game"
-      }
+      } // end tutorial step
     tClick.play()
-  }
+  } // end tutorial state
   if (gamestate == "nav") {
     if (mouseOn == false) {
       mouseOn = true
-    }
+    } // end mouse reset
     // TAKE TO SHRINE
     if (mouseX >= 140 && mouseX <= 360 && mouseY >= 60 && mouseY <= 280) {
       gamestate = "game"
-    }
+    } // end shrine nav click
 
     // TAKE TO SHOP
     if (mouseX >= 440 && mouseX <= 660 && mouseY >= 60 && mouseY <= 280) {
       gamestate = "shop"
-    }
+    } // end shop nav click
 
     // TAKE TO SUMMON CENTER
     if (mouseX >= 140 && mouseX <= 360 && mouseY >= 320 && mouseY <= 540) {
       gamestate = "summon"
       substate = "center"
-    }
+    } // end summon nav click
 
     // END THE GAME
     if (mouseX >= 440 && mouseX <= 660 && mouseY >= 320 && mouseY <= 540 && mouseOn == true) {
@@ -2659,9 +2659,9 @@ function mousePressed() {
         }
       });
       
-    }
-  }
-}
+    } // end endgame nav click
+  } // end nav state
+} // end mousePressed
 
 
 function saveGame() {
