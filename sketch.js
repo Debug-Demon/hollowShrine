@@ -37,7 +37,7 @@ CUSTOM LOADING SCREEN:
 styles;
   https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
 ----------------------------------------------SELF ASSESMENT----------------------------------------------
- I BELIEVE THAT IS SOULD GET A FOUR PLUS BECAUSE:
+ I BELIEVE THAT I SOULD GET A FOUR PLUS BECAUSE:
    -I HAVE A VERY GOOD TUTORIAL THAT IS ENGAGING
    -I USED A LOT OF LVL 4+ THINGS LIKE:
      -ARRAYS
@@ -51,7 +51,7 @@ styles;
      -LIBRARIES
      -CUSTOM LOADING SCREEN
      -LOCAL STORAGE
-  -I ALSO BELIEVE THAT MY CODE IS, MOSTLY, EASY TO READ HOWEVER THERE ARE SOME REPETITIVE PARTS I DIDN'T KNOW WHAT TO DO WITH.
+  -I ALSO BELIEVE THAT MY CODE IS, MOSTLY, EASY TO READ. HOWEVER THERE ARE SOME REPETITIVE PARTS I DIDN'T KNOW WHAT TO DO WITH.
   - MY GAME IS FUN
   - THERE IS LORE
   - THERE IS A LUCK BASED ELEMENT WHICH MAKES IT MORE FUN
@@ -67,50 +67,81 @@ styles;
 // ______________________________________VARIABLES_________________________
 
 
-let shrine
-let gamestate
+// ===================== CORE GAME STATE =====================
+let gameState
 let score
+let scaleFactor
+let mouseOn = true
+
+
+// ===================== BACKGROUNDS / UI / FONTS =====================
+let shrine
 let shopBg
+let menuBg
 let essenceFont
-let shopWidget
-let shopToMain
-let bgMusicShrine
-let bgMusicShop
-let bgMusicMenu
-
-// Cursor
-let bestCursor 
-let cursorArray
-
-// upgrade Price Storing Variables
-let ritualPrice
-let offerPrice
-let cultistPrice
-let greedPrice
-
-let ritualBase
-let offerMultiplier
+let shopWidget  //the widgets which you click to buy the stuff from the shop 
+let settings // settings button
 
 
-// Shop Stuff
-let ritualPrices
-let ritualValue
-let offerPrices
-let offerValue
-let cultistPrices
-let cultistValues
-let greedPrices
-let greedValues
-let cursorT0, cursorT1, cursorT2, cursorT3, cursorT4, cursorT5, cursorT6, cursorT7, cursorT8, cursorT9, cursorT10
+// ===================== AUDIO =====================
+let bgMusicMenu //Menu Bg Music
+let bgMusicShrine // gamestate = "game" music
+let bgMusicShop // shop bg music
+
+
+// sounds for different rituals (the click sound effects for each of the cursors)
+let ritualT1Sound
+let ritualT2Sound
+let ritualT3Sound
+let ritualT4Sound
+let ritualT5Sound
+let ritualT6Sound
+let ritualT7Sound
+let ritualT8Sound
+let ritualT9Sound
+let ritualT10Sound
+
+let tClick //sound of cursor click in gamestate = "tutorial"
+let tMusic // background music for tutorial
+
+
+// ===================== CURSOR =====================
+let bestCursor // the highest cursor level the player has. (determined by ritual tier)
+let cursorArray // array that holds all the cursor files
+
+
+
+
+
+
+// ===================== SHOP PRICE ARRAYS & VALUES =====================
+let ritualBase // base value array for the ritual.
+let offerMultiplier // how much the offer multiplies the value
+let ritualPrices // the prices of the ritual in SHORT FORM (EG. 1K instead of 1000)
+let ritualValue // NUMERICAL VALUE of the prices for the ritual upgrades
+let offerPrices //SAME PATTERN AS BEFORE
+let offerValue//SAME PATTERN AS BEFORE
+let cultistPrices//SAME PATTERN AS BEFORE
+let cultistValues//SAME PATTERN AS BEFORE
+let greedPrices//SAME PATTERN AS BEFORE
+let greedValues//SAME PATTERN AS BEFORE
+
+
+// ===================== SHOP VISIBILITY =====================
 let ritualShow
 let offerShow
 let cultistShow
 let greedShow
 
-// TIERS
-let tierRitual, tierOffer, tierCultist, tierGreed
 
-// Different Click Multiplier Variables
+// ===================== SHOP TIERS =====================
+let tierRitual
+let tierOffer
+let tierCultist
+let tierGreed
+
+
+// ===================== CLICK MULTIPLIERS =====================
 let base
 let offerMultipliers
 let cultistModifiers
@@ -119,45 +150,62 @@ let cultistModifier
 let greedMultiplier
 
 
-// ritual sounds
-let ritualT1Sound, ritualT2Sound, ritualT3Sound, ritualT4Sound, ritualT5Sound, ritualT6Sound, ritualT7Sound, ritualT8Sound, ritualT9Sound, ritualT10Sound 
+// ===================== CURSOR TIERS =====================
+let cursorT0
+let cursorT1
+let cursorT2
+let cursorT3
+let cursorT4
+let cursorT5
+let cursorT6
+let cursorT7
+let cursorT8
+let cursorT9
+let cursorT10
 
-// Menu stuff
-let menuBg
 
-// TUTORIAL
-let tArrayMark
-let tArray
-let  t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19,t20,t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36,t37,t38
-
-let tClick
-let tMusic
-
-
-// Buttons
-
-let settings
-
+// ===================== MENU BUTTONS =====================
 let optionsButton
 let playButton
 let loadProgressButton
 let exitButton
-// sprite sheets
+
+
+// ===================== TUTORIAL =====================
+let tArray
+let tArrayMark
+
+let t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38
+
+
+// ===================== CULTIST SPRITES =====================
 let cultistSpriteArray
-let T1idleSheet, T2idleSheet, T3idleSheet, T4idleSheet, T5idleSheet, T6idleSheet, T7idleSheet, T8idleSheet, T9idleSheet, T10idleSheet
-
 let cultistSprite
-let mouseOn = true
 
-// SUMMON SPRITES:
-// TOKENS
-    // COMMON
+let T1idleSheet
+let T2idleSheet
+let T3idleSheet
+let T4idleSheet
+let T5idleSheet
+let T6idleSheet
+let T7idleSheet
+let T8idleSheet
+let T9idleSheet
+let T10idleSheet
+
+
+// ===================== SUMMON CENTER =====================
+let summonCenter
+
+
+// ===================== SPRITE TOKENS =====================
+// COMMON
 let zombie1SpriteToken
 let zombie2SpriteToken
 let zombie3SpriteToken
 let spearSpriteToken
 
-    // UNCOMMON
+// UNCOMMON
 let minotaur1SpriteToken
 let minotaur2SpriteToken
 let minotaur3SpriteToken
@@ -168,30 +216,31 @@ let ravenSpriteToken
 let mushroomSpriteToken
 let goblinSpriteToken
 
-    // LEGENDARY
+// LEGENDARY
 let goblinBeastSpriteToken
 let ancientSkeletonSpriteToken
 let goblinRiderSpriteToken
 let necromancerSpriteToken
 
-    // MYTHIC
+// MYTHIC
 let kitsuneSpriteToken
 let eyeSpriteToken
 let knightSpriteToken
 let flareSpriteToken
 
-    // GODLY
+// GODLY
 let skeletonGeneralSpriteToken
 let plant1SpriteToken
 let archerSpriteToken
 let skeletonKingSpriteToken
 
-    // FORBIDDEN
+// FORBIDDEN
 let flameSpriteToken
 let lightSpriteToken
 let magicSpriteToken
-// --------------------------------------------
-let summonCenter
+
+
+// ===================== ACTIVE SUMMONS =====================
 // COMMON
 let zombie1
 let zombie2
@@ -233,7 +282,8 @@ let flame
 let light
 let magic
 
-// SUMMON INV BOX:
+
+// ===================== INVENTORY BOXES =====================
 // COMMON
 let zombie1Box
 let zombie2Box
@@ -276,12 +326,16 @@ let lightBox
 let magicBox
 
 
-// summon designs
+// ===================== SUMMON EGGS =====================
 let eggPrices
 let eggNames
 
 
+
 // ---------------------------------------------CLASSES ------------------------------------------------
+
+
+class Sprite { // sprite sheet animation
 /*      CLASS HEADER
 
 CLASS NAME: 
@@ -292,7 +346,7 @@ DESCRIPTION:
 - It allows an image sprite sheet with multiple square frames to be animated by going through the frames.
 
 ARGUMENTS (constructor):
-- sheet: p5.Image → The sprite sheet image.
+- sheet: Image → The sprite sheet image.
 - x: number → The x-coordinate where the animation will be.
 - y: number → The y-coordinate where the animation will be.
 - scale: number → The scale factor to resize the sprite frames.
@@ -301,12 +355,7 @@ METHODS:
 - make(): Draws the current frame of the sprite on the canvas and advances the frames for animation.
 RETURNS:
 -none
-
-
-
 */
-
-class Sprite { // sprite sheet animation
   constructor(sheet, x, y, scale) {
     this.image = sheet   // the image
     this.x = x // x of the img
@@ -338,7 +387,9 @@ class Sprite { // sprite sheet animation
     }
   }
 }
-/*      CLASS HEADER
+
+class InventoryBox {
+  /*      CLASS HEADER
 
 CLASS NAME: 
 -InventoryBox
@@ -358,7 +409,6 @@ RETURNS:
 
 
 */
-class InventoryBox {
   constructor(x, y, sprite) {
     this.x = x
     this.y = y
@@ -482,6 +532,7 @@ function preload() {
 
   //   buttons
   eraseButton = createButton("ERASE PROGRESS")
+ 
   switchButton.hide()
   switchButton.style('background-color', '#1a1a1a') // bg color
   switchButton.style('color', '#f5f5f5') // text color
@@ -574,12 +625,15 @@ function preload() {
 }
 
 function setup() {  
+  scaleFactor = 1
   tArrayMark = 0
   createCanvas(800, 800)
   switchButton.show()
   eraseButton.show()
   score = 0
+  scoreShow= floor(score)
   eraseButton.mousePressed(gameDelete)
+  
   switchButton.mousePressed(toNav)
   base = 1
   baseAdd = 0
@@ -594,10 +648,6 @@ function setup() {
   gamestate = "menu"
   substate = "center"
   summonCenter = []
-  ritualPrice = 20
-  offerPrice = 50
-  cultistPrice = 200
-
   ritualShow = 1
   offerShow = 1 
   cultistShow = 1 
@@ -782,6 +832,7 @@ function setup() {
 } 
 // --------------------------------GAME LOOP------------------------------------------------------
 function draw() {
+  scale(scaleFactor)
   if (gamestate == "summon") {
     bgMusicShrine.stop()
     tokenAdd()
@@ -1069,7 +1120,7 @@ function draw() {
   
     if (gamestate !== "tutorial" && gamestate!== "menu" && gamestate !== "nav") {
       settings.show()
-      settings.position(760,20)
+      settings.position(760,10)
       settings.size(40,40)
       settings.mouseOver(settingsHover)
       settings.mousePressed(toSettings)
@@ -1093,8 +1144,11 @@ function draw() {
     } else{
       tMusic.stop()
     }
-  
+    if (gamestate !== "settings") {
+      
+    }
     if (gamestate == "settings") {
+      
       eraseButton.show()
       settings.hide()
       noStroke()
@@ -1119,8 +1173,12 @@ function draw() {
       eraseButton.style('border-radius', '4px') // curvature
       eraseButton.style('padding', '10px 20px') // space around text (box size)
       eraseButton.style('cursor', 'pointer') // cursor
+      
       eraseButton.mouseOver(eraseHover)
       eraseButton.mouseOut(eraseNotHover)
+      
+     
+
     } else{
       eraseButton.hide()
     }
@@ -1148,7 +1206,8 @@ function draw() {
       textFont(essenceFont)
       textSize(50)
       fill(136, 8, 8)
-      text("ESSENCE:  " + score,255, 80)
+      scoreShow = floor(score)
+      text("ESSENCE:  " + scoreShow,255, 80)
       cultistSprite.make()
       if (mouseX >= 310 && mouseX <= 457 && mouseY >= 237 && mouseY<=466) {
         noCursor()
@@ -1264,6 +1323,7 @@ function mousePressed() {
       base = ritualBase[ritualShow]+cultistModifiers[cultistShow]
       multiplier = offerMultipliers[offerShow]* greedMultipliers[greedShow]
       scoreAdd = (base+baseAdd) *multiplierBoost*multiplier
+      
     //     CHECKS FOR CLICKS ON THE SHRINE
     if (mouseX >= 310 && mouseX <= 457 && mouseY >= 237 && mouseY<=466) {
       score = score+scoreAdd
@@ -2613,9 +2673,7 @@ function mousePressed() {
     tClick.play()
   }
   if (gamestate == "nav") {
-    if (mouseOn == false) {
-      mouseOn = true
-    }
+    
     // TAKE TO SHRINE
     if (mouseX >= 140 && mouseX <= 360 && mouseY >= 60 && mouseY <= 280) {
       gamestate = "game"
@@ -2633,7 +2691,7 @@ function mousePressed() {
     }
 
     // END THE GAME
-    if (mouseX >= 440 && mouseX <= 660 && mouseY >= 320 && mouseY <= 540 && mouseOn == true) {
+    if (mouseX >= 440 && mouseX <= 660 && mouseY >= 320 && mouseY <= 540) {
       Swal.fire({
         title: "Are you sure?",
         text: "Your data will be saved but all summons in the summon center will fade away.",
@@ -3163,10 +3221,12 @@ function tokenAdd() {
             magicSpriteToken++
         }
     }
-}
+  }
 }
 
-/* FUNCTION HEADER
+
+function hover() {
+  /* FUNCTION HEADER
   
 FUNCTION NAME: HOVER
   
@@ -3178,12 +3238,13 @@ RETURNS: none
   
   
 */
-function hover() {
   switchButton.style('background-color', '#2b0000') //color of button
   switchButton.style('box-shadow', '0 0 10px #ff3333') // color of shadow
   switchButton.style('transform', 'scale(1.05)') // scales
 }
-/* FUNCTION HEADER
+
+function notHover() {
+  /* FUNCTION HEADER
   
 FUNCTION NAME:notHover
   
@@ -3195,12 +3256,13 @@ RETURNS: none
   
   
 */
-function notHover() {
   switchButton.style('background-color', '#1a1a1a') // color of buttton
   switchButton.style('box-shadow', '0 0 5px #660000') // color of shadow
   switchButton.style('transform', 'scale(1)') // scales
 }
-/* FUNCTION HEADER
+
+function toGame () {
+  /* FUNCTION HEADER
   
 FUNCTION NAME: toGame
   
@@ -3212,10 +3274,11 @@ RETURNS: none
   
   
 */
-function toGame () {
   gamestate = "game"
 }
-/* FUNCTION HEADER
+
+function toTutorial() {
+  /* FUNCTION HEADER
   
 FUNCTION NAME:toTutorial
   
@@ -3227,10 +3290,12 @@ RETURNS: none
   
   
 */
-function toTutorial() {
   gamestate = "tutorial"
 }
-/* FUNCTION HEADER
+
+function toSettings() {
+  gamestate = "settings"
+  /* FUNCTION HEADER
   
 FUNCTION NAME: toSettings
   
@@ -3242,10 +3307,11 @@ RETURNS: none
   
   
 */
-function toSettings() {
-  gamestate = "settings"
 }
-/* FUNCTION HEADER
+
+
+function settingsHover() {
+  /* FUNCTION HEADER
   
 FUNCTION NAME:settingsHover
   
@@ -3257,11 +3323,11 @@ RETURNS: none
   
   
 */
-
-function settingsHover() {
   settings.style("cursor", "pointer")
 }
-/* FUNCTION HEADER
+
+function eraseHover() {
+  /* FUNCTION HEADER
   
 FUNCTION NAME: eraseHover
   
@@ -3273,12 +3339,13 @@ RETURNS: none
   
   
 */
-function eraseHover() {
   eraseButton.style('background-color', '#2b0000') //color of button
   eraseButton.style('box-shadow', '0 0 10px #ff3333') // color of shadow
   eraseButton.style('transform', 'scale(1.05)') // scales
 }
-/* FUNCTION HEADER
+
+function eraseNotHover() {
+  /* FUNCTION HEADER
   
 FUNCTION NAME: eraseNotHover
   
@@ -3290,12 +3357,18 @@ RETURNS: none
   
   
 */
-function eraseNotHover() {
   eraseButton.style('background-color', '#1a1a1a') // color of buttton
   eraseButton.style('box-shadow', '0 0 5px #660000') // color of shadow
   eraseButton.style('transform', 'scale(1)') // scales
 }
 
 
+
+
+
+
+
 // to do:
-  //programme header
+  //end screen ~2 mins
+  //switch back ~4-5mins
+  //tutorial to back ~1-2 mins
