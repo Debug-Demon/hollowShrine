@@ -67,11 +67,10 @@ styles;
 // ______________________________________VARIABLES_________________________
 
 
-// ===================== CORE GAME STATE =====================
-let gameState
+// ===================== CORE GAME STUFF =====================
+let gamestate
 let score
-let scaleFactor
-let mouseOn = true
+
 
 
 // ===================== BACKGROUNDS / UI / FONTS =====================
@@ -90,16 +89,16 @@ let bgMusicShop // shop bg music
 
 
 // sounds for different rituals (the click sound effects for each of the cursors)
-let ritualT1Sound
-let ritualT2Sound
-let ritualT3Sound
-let ritualT4Sound
-let ritualT5Sound
-let ritualT6Sound
-let ritualT7Sound
-let ritualT8Sound
-let ritualT9Sound
-let ritualT10Sound
+let ritualT1Sound //SOUND AT RITUAL TIER 1
+let ritualT2Sound //SOUND AT RITUAL TIER 2
+let ritualT3Sound //SOUND AT RITUAL TIER 3
+let ritualT4Sound //SOUND AT RITUAL TIER 4
+let ritualT5Sound //SOUND AT RITUAL TIER 5
+let ritualT6Sound //SOUND AT RITUAL TIER 6
+let ritualT7Sound //SOUND AT RITUAL TIER 7
+let ritualT8Sound //SOUND AT RITUAL TIER 8
+let ritualT9Sound //SOUND AT RITUAL TIER 9
+let ritualT10Sound //SOUND AT RITUAL TIER 10
 
 let tClick //sound of cursor click in gamestate = "tutorial"
 let tMusic // background music for tutorial
@@ -115,90 +114,83 @@ let cursorArray // array that holds all the cursor files
 
 
 // ===================== SHOP PRICE ARRAYS & VALUES =====================
-let ritualBase // base value array for the ritual.
-let offerMultiplier // how much the offer multiplies the value
+let ritualBase // base value array for the ritual
 let ritualPrices // the prices of the ritual in SHORT FORM (EG. 1K instead of 1000)
 let ritualValue // NUMERICAL VALUE of the prices for the ritual upgrades
-let offerPrices //SAME PATTERN AS BEFORE
-let offerValue//SAME PATTERN AS BEFORE
-let cultistPrices//SAME PATTERN AS BEFORE
-let cultistValues//SAME PATTERN AS BEFORE
-let greedPrices//SAME PATTERN AS BEFORE
-let greedValues//SAME PATTERN AS BEFORE
+let ritualShow // VALUE WHICH THE RITUAL PRICES ARRAY USES TO GET THE PRICE
+let tierRitual // THE RITUAL VALUE THAT IS SHOWN TO THE PLAYER IN THE SHOP GAMESTATE
+
+let offerPrices // the prices of the offer in SHORT FORM (EG. 1K instead of 1000)
+let offerValue // NUMERICAL VALUE of the prices for the offer upgrades
+let offerMultipliers // ARRAY THAT STORES THE OFFER MULTIPLIER VALUES
+let offerShow // VALUE WHICH THE OFFER PRICES ARRAY USES TO GET THE PRICE
+let tierOffer // THE OFFER VALUE THAT IS SHOWN TO THE PLAYER IN THE SHOP GAMESTATE
+
+let cultistPrices // the prices of the cultists in SHORT FORM (EG. 1K instead of 1000)
+let cultistValues //NUMERICAL VALUE of the cultist for the ritual upgrades
+let cultistModifiers // ARRAY THAT STORES THE CULTIST MULTIPLIER VALUES
+let cultistShow // VALUE WHICH THE CULTIST PRICES ARRAY USES TO GET THE PRICE
+let cultistSpriteArray // ARRAY STORING IMAGES OF THE CULTIST SPRITES
+let tierCultist // THE CULTIST VALUE THAT IS SHOWN TO THE PLAYER IN THE SHOP GAMESTATE
+
+let greedPrices // the prices of the GREED in SHORT FORM (EG. 1K instead of 1000)
+let greedValues // NUMERICAL VALUE of the prices for the greed upgrades
+let greedMultipliers // ARRAY THAT STORES THE MULTIPLIERS FOR THE GREED UPGRADE
+let greedShow // VALUE WHICH THE GREED PRICES ARRAY USES TO GET THE PRICE
+let tierGreed // THE GREED VALUE THAT IS SHOWN TO THE PLAYER IN THE SHOP GAMESTATE
+
+let tArray // ARRAY STORING ALL THE IMAGES FOR THE TUTORIAL
+let tArrayMark // ITEM NUMBER OF tArray
+
+let summonCenter // ARRAY THAT STORES SUMMONS INSIDE THE SUMMON CENTER 
 
 
-// ===================== SHOP VISIBILITY =====================
-let ritualShow
-let offerShow
-let cultistShow
-let greedShow
+let eggPrices // STORES THE PRICES OF SUMMONING
+let eggNames // STORES THE NAME OF THE EGGS
 
-
-// ===================== SHOP TIERS =====================
-let tierRitual
-let tierOffer
-let tierCultist
-let tierGreed
-
-
-// ===================== CLICK MULTIPLIERS =====================
-let base
-let offerMultipliers
-let cultistModifiers
-let greedMultipliers
-let cultistModifier
-let greedMultiplier
-
+// ===================== CLICK MULTIPLIERS/BASE =====================
+let base // BASE VALUE OF THE CLICK (SUM OF RITUAL BASE AND CULTIST MODIFIER)
 
 // ===================== CURSOR TIERS =====================
-let cursorT0
-let cursorT1
-let cursorT2
-let cursorT3
-let cursorT4
-let cursorT5
-let cursorT6
-let cursorT7
-let cursorT8
-let cursorT9
-let cursorT10
-
-
-// ===================== MENU BUTTONS =====================
-let optionsButton
-let playButton
-let loadProgressButton
-let exitButton
+let cursorT1 //CURSOR AT RITUAL TIER 1
+let cursorT2 //CURSOR AT RITUAL TIER 2
+let cursorT3 //CURSOR AT RITUAL TIER 3
+let cursorT4 //CURSOR AT RITUAL TIER 4
+let cursorT5 //CURSOR AT RITUAL TIER 5
+let cursorT6 //CURSOR AT RITUAL TIER 6
+let cursorT7 //CURSOR AT RITUAL TIER 7
+let cursorT8 //CURSOR AT RITUAL TIER 8
+let cursorT9 //CURSOR AT RITUAL TIER 9
+let cursorT10 //CURSOR AT RITUAL TIER 10
 
 
 // ===================== TUTORIAL =====================
-let tArray
-let tArrayMark
 
-let t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38
+
+let t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38 // IMAGES OF THE TUTORIAL
 
 
 // ===================== CULTIST SPRITES =====================
-let cultistSpriteArray
-let cultistSprite
 
-let T1idleSheet
-let T2idleSheet
-let T3idleSheet
-let T4idleSheet
-let T5idleSheet
-let T6idleSheet
-let T7idleSheet
-let T8idleSheet
-let T9idleSheet
-let T10idleSheet
+let cultistSprite // NEW CLASS Sprite
 
-
-// ===================== SUMMON CENTER =====================
-let summonCenter
-
+let T1idleSheet //CULTIST SPRITE SHEET TIER 1 
+let T2idleSheet //CULTIST SPRITE SHEET TIER 2
+let T3idleSheet //CULTIST SPRITE SHEET TIER 3
+let T4idleSheet //CULTIST SPRITE SHEET TIER 4 
+let T5idleSheet //CULTIST SPRITE SHEET TIER 5 
+let T6idleSheet //CULTIST SPRITE SHEET TIER 6 
+let T7idleSheet //CULTIST SPRITE SHEET TIER 7 
+let T8idleSheet //CULTIST SPRITE SHEET TIER 8 
+let T9idleSheet //CULTIST SPRITE SHEET TIER 9 
+let T10idleSheet //CULTIST SPRITE SHEET TIER 10 
 
 // ===================== SPRITE TOKENS =====================
+/*
+      p5js uses JSON to store data. HOWEVER JSON cannot store objects. So in order I couldn't just use storeItem() to store the sprites since they were all just copies of the Sprite class, which is an object. So I had to take a different approach: Store the amount of the sprites instead of the sprites themselves. This way I could just have a for loop go through the amounts and put that many of the sprites in the inventory.
+*/
+
+
 // COMMON
 let zombie1SpriteToken
 let zombie2SpriteToken
@@ -240,7 +232,7 @@ let lightSpriteToken
 let magicSpriteToken
 
 
-// ===================== ACTIVE SUMMONS =====================
+// ===================== SUMMON SPRITE SHEETS =====================
 // COMMON
 let zombie1
 let zombie2
@@ -327,8 +319,7 @@ let magicBox
 
 
 // ===================== SUMMON EGGS =====================
-let eggPrices
-let eggNames
+
 
 
 
@@ -456,37 +447,67 @@ RETURNS:
 
 // --------------------------------------------------------------------------------------------------------
 function preload() {
-// GAMESTATE SWITCH BUTTON
-  switchButton = createButton("TRAVEL")
-  shrine = loadImage("ClickerShrine.png.png") 
-  shopBg = loadImage("shopBgs.gif")
-  shrineBg = loadImage("shrineBgs-1.gif")
-  shopWidget = loadImage("ShopWidget.png")
-// Cursors AKA rituals
-  cursorT1 = loadImage("ritualKnife.png")
-  cursorT2 = loadImage("ritualStaff.png")
-  cursorT3 = loadImage("ritualSkull.png")
-  cursorT4 = loadImage("ritualGrimoire.png")
-  cursorT5 = loadImage("ritualPendant.png")
-  cursorT6 = loadImage("ritualIdol.png")
-  cursorT7 = loadImage("ritualScythe.png")
-  cursorT8 = loadImage("ritualShell.png")
-  cursorT9 = loadImage("ritualScroll.png")
-  cursorT10 = loadImage("ritualRing.png")
-//   Menu images
-  menuBg = loadImage("menuBG.gif")
-  playsButton = loadImage("playPNG.png")
-  statue = loadImage("statue.png")
-//   TUTORIAL IMAGES
-  t1  = loadImage("t1.gif")
-  t2  = loadImage("t2.gif")
-  t3  = loadImage("t3.gif")
-  t4  = loadImage("t4.gif")
-  t5  = loadImage("t5.jpg")
-  t6  = loadImage("t6.jpg")
-  t7  = loadImage("t7.gif")
-  t8  = loadImage("t8.jpg")
-  t9  = loadImage("t9.jpg")
+  
+  // ===================== BUTTONS =====================
+  switchButton = createButton("TRAVEL") // GAMESTATE SWITCH BUTTON
+  eraseButton = createButton("ERASE PROGRESS") // ERASE BUTTON
+
+  switchButton.hide() //hides the navigation button
+  switchButton.style('background-color', '#1a1a1a') // bg color
+  switchButton.style('color', '#f5f5f5') // text color
+  switchButton.style('font-family', 'monospace') // font
+  switchButton.style('font-size', '12px') // size
+  switchButton.style('border', '2px solid #660000') // border: thickness type color
+  switchButton.style('border-radius', '4px') // curvature
+  switchButton.style('padding', '10px 20px') // space around text (box size)
+  switchButton.style('cursor', 'pointer') // cursor
+  switchButton.mouseOver(hover) // hover effect
+  switchButton.mouseOut(notHover) // hover effect
+  
+  eraseButton.hide() // hides the erase progress button
+  eraseButton.position(140,85) // changes the position of the erase button
+  eraseButton.size(520,440) // changes the size of the button
+  eraseButton.style("font-size", "60px") // changes the font size of the text of the button
+  eraseButton.style('background-color', '#1a1a1a') // bg color
+  eraseButton.style('color', '#f5f5f5') // text color
+  eraseButton.style('font-family', 'monospace') // font
+  eraseButton.style('border', '2px solid #660000') //border: thickness, type, color
+  eraseButton.style('border-radius', '4px') // curvature
+  eraseButton.style('padding', '10px 20px') // space around text (box size)
+  eraseButton.style('cursor', 'pointer') // cursor
+  eraseButton.mouseOver(eraseHover)
+  eraseButton.mouseOut(eraseNotHover)
+
+  // ===================== BACKGROUNDS =====================
+  shrine = loadImage("ClickerShrine.png.png")  //loads the shrine image
+  shopBg = loadImage("shopBgs.gif") // loads the shop background
+  shrineBg = loadImage("shrineBgs-1.gif") // loads the shrine background
+  shopWidget = loadImage("ShopWidget.png")// loads the shop widget
+  menuBg = loadImage("menuBG.gif") // loads the menu background
+
+  // ===================== CURSORS / RITUALS =====================
+  cursorT1 = loadImage("ritualKnife.png") // loads ritual cursor image tier 1
+  cursorT2 = loadImage("ritualStaff.png") // loads ritual cursor image tier 2
+  cursorT3 = loadImage("ritualSkull.png") // loads ritual cursor image tier 3
+  cursorT4 = loadImage("ritualGrimoire.png") // loads ritual cursor image tier 4
+  cursorT5 = loadImage("ritualPendant.png") // loads ritual cursor image tier 5
+  cursorT6 = loadImage("ritualIdol.png") // loads ritual cursor image tier 6
+  cursorT7 = loadImage("ritualScythe.png") // loads ritual cursor image tier 7
+  cursorT8 = loadImage("ritualShell.png") // loads ritual cursor image tier 8
+  cursorT9 = loadImage("ritualScroll.png") // loads ritual cursor image tier 9
+  cursorT10 = loadImage("ritualRing.png") // loads ritual cursor image tier 10
+
+  // ===================== TUTORIAL IMAGES =====================
+  //   THESE ARE THE DIFFERENT "SLIDES" OF THE TUTORIAL
+  t1 = loadImage("t1.gif")
+  t2 = loadImage("t2.gif")
+  t3 = loadImage("t3.gif")
+  t4 = loadImage("t4.gif")
+  t5 = loadImage("t5.jpg")
+  t6 = loadImage("t6.jpg")
+  t7 = loadImage("t7.gif")
+  t8 = loadImage("t8.jpg")
+  t9 = loadImage("t9.jpg")
   t10 = loadImage("t10.gif")
   t11 = loadImage("t11.jpg")
   t12 = loadImage("t12.jpg")
@@ -516,70 +537,48 @@ function preload() {
   t36 = loadImage("t36.jpg")
   t37 = loadImage("t37.gif")
   t38 = loadImage("t38.gif")
-  
-// tutorial sound
-  tMusic = loadSound("tutorialBgMusic.m4a")
-  tClick = loadSound("tClick.mp3")
-  
-  //   fonts
-  essenceFont = loadFont("FEASFBRG.TTF")
 
-  //   TIER
-  tierRitual = 1
-  tierOffer = 1
-  tierCultist = 1
-  tierGreed = 1
+  // ===================== TUTORIAL SOUNDS =====================
+  tMusic = loadSound("tutorialBgMusic.m4a") // loads the tutorial background music
+  tClick = loadSound("tClick.mp3") // loads the tutorial clicking sound
 
-  //   buttons
-  eraseButton = createButton("ERASE PROGRESS")
- 
-  switchButton.hide()
-  switchButton.style('background-color', '#1a1a1a') // bg color
-  switchButton.style('color', '#f5f5f5') // text color
-  switchButton.style('font-family', 'monospace') // font
-  switchButton.style('font-size', '12px') // size
-  switchButton.style('border', '2px solid #660000') //border: thickness, type, color
-  switchButton.style('border-radius', '4px') // curvature
-  switchButton.style('padding', '10px 20px') // space around text (box size)
-  switchButton.style('cursor', 'pointer') // cursor
-
-// hover effect using mouseOver and mouseOut
-  switchButton.mouseOver(hover)
-  switchButton.mouseOut(notHover)
+  // ===================== FONTS =====================
+  essenceFont = loadFont("FEASFBRG.TTF") // loads the main font used in the game
 
 
-  
-//   music
-  bgMusicShrine = loadSound("bgMusicShrine.mp3")
-  bgMusicMenu = loadSound("Bgmusic.mp3")
-//     ritual sounds
-  ritualT1Sound = loadSound("ritualT1Sound.mp3")
-  ritualT2Sound = loadSound("ritualT2Sound.mp3")
-  ritualT3Sound = loadSound("ritualT3Sound.mp3")
-  ritualT4Sound = loadSound("ritualT4Sound.mp3")
-  ritualT5Sound = loadSound("ritualT5Sound.mp3")
-  ritualT6Sound = loadSound("ritualT6Sound.mp3")
-  ritualT7Sound = loadSound("ritualT7Sound.mp3")
-  ritualT8Sound = loadSound("ritualT8Sound.mp3")
-  ritualT9Sound = loadSound("ritualT9Sound.mp3")
-  ritualT10Sound = loadSound("ritualT10sound.mp3")
-// sprite sheets
-  T1idleSheet = loadImage("idleSheet.png")
-  T2idleSheet = loadImage("cultistT2idle.png")
-  T3idleSheet = loadImage("cultistT3idle.png")
-  T4idleSheet = loadImage("cultistT4idle.png")
-  T5idleSheet = loadImage("cultistT5idle.png")
-  T6idleSheet = loadImage("cultistT6idle.png")
-  T7idleSheet = loadImage("cultistT7idle.png")
-  T8idleSheet = loadImage("cultistT8idle.png")
-  T9idleSheet = loadImage("cultistT9idle.png")
-  T10idleSheet = loadImage("cultistT10idle.png")
-  
-//   SHOP SOUNDS
-  shopBgMusic = loadSound("shopBG.mp3")
-  fire = loadSound("fire.mp3")
-//   --------------------SUMMONS----------------------------
-    // COMMON
+  // ===================== MUSIC =====================
+  bgMusicShrine = loadSound("bgMusicShrine.mp3") // loads the shrine background music
+  bgMusicMenu = loadSound("Bgmusic.mp3") // loads the background music for the menu
+  shopBgMusic = loadSound("shopBG.mp3") // loads the shop background music
+  fire = loadSound("fire.mp3") //loads the fire sound for the shop gamestate
+
+  // ===================== RITUAL SOUNDS =====================
+  ritualT1Sound = loadSound("ritualT1Sound.mp3") //loads the click sound at ritual tier 1
+  ritualT2Sound = loadSound("ritualT2Sound.mp3") //loads the click sound at ritual tier 2
+  ritualT3Sound = loadSound("ritualT3Sound.mp3") //loads the click sound at ritual tier 3
+  ritualT4Sound = loadSound("ritualT4Sound.mp3") //loads the click sound at ritual tier 4
+  ritualT5Sound = loadSound("ritualT5Sound.mp3") //loads the click sound at ritual tier 5
+  ritualT6Sound = loadSound("ritualT6Sound.mp3") //loads the click sound at ritual tier 6
+  ritualT7Sound = loadSound("ritualT7Sound.mp3") //loads the click sound at ritual tier 7
+  ritualT8Sound = loadSound("ritualT8Sound.mp3") //loads the click sound at ritual tier 8
+  ritualT9Sound = loadSound("ritualT9Sound.mp3") //loads the click sound at ritual tier 9
+  ritualT10Sound = loadSound("ritualT10sound.mp3") //loads the click sound at ritual tier 10
+
+  // ===================== SPRITE SHEETS =====================
+  T1idleSheet = loadImage("idleSheet.png") //loads the cultist sprite sheets tier 1
+  T2idleSheet = loadImage("cultistT2idle.png") //loads the cultist sprite sheets tier 2
+  T3idleSheet = loadImage("cultistT3idle.png") //loads the cultist sprite sheets tier 3
+  T4idleSheet = loadImage("cultistT4idle.png") //loads the cultist sprite sheets tier 4
+  T5idleSheet = loadImage("cultistT5idle.png") //loads the cultist sprite sheets tier 5
+  T6idleSheet = loadImage("cultistT6idle.png") //loads the cultist sprite sheets tier 6
+  T7idleSheet = loadImage("cultistT7idle.png") //loads the cultist sprite sheets tier 7
+  T8idleSheet = loadImage("cultistT8idle.png") //loads the cultist sprite sheets tier 8
+  T9idleSheet = loadImage("cultistT9idle.png") //loads the cultist sprite sheets tier 9
+  T10idleSheet = loadImage("cultistT10idle.png") //loads the cultist sprite sheets tier 10
+
+  // ===================== SUMMONS =====================
+//        SPRITE SHEETS FOR THE SUMMONS
+  // COMMON
   zombie1 = loadImage("zombie1.png")
   zombie2 = loadImage("zombie2.png")
   zombie3 = loadImage("zombie3.png")
@@ -619,53 +618,56 @@ function preload() {
   flame = loadImage("Flame.png")
   light = loadImage("Light.png")
   magic = loadImage("Magic.png")
-// ________________other stuff_________________________
- 
 
 }
 
-function setup() {  
-  scaleFactor = 1
-  tArrayMark = 0
+function setup() { 
+  // ===================== SHOP GAMESTATE VALUES =====================
+  tierRitual = 1
+  tierOffer = 1
+  tierCultist = 1
+  tierGreed = 1
+  ritualShow = 1
+  offerShow = 1
+  cultistShow = 1
+  greedShow = 1
+  // ===================== CANVAS & GAME SETUP =====================
   createCanvas(800, 800)
-  switchButton.show()
-  eraseButton.show()
-  score = 0
-  scoreShow= floor(score)
-  eraseButton.mousePressed(gameDelete)
-  
-  switchButton.mousePressed(toNav)
-  base = 1
-  baseAdd = 0
+  switchButton.show() // makes the travel button visible
+  score = 200 // sets score to zero
+  scoreShow = floor(score) // shows the smallest integer less than or equal to the score to the player
+  eraseButton.mousePressed(gameDelete) //An event listener which listens for the click of the erase progress button and runs the gameDelete function
+  switchButton.mousePressed(toNav) // Another event listener but for the travel button and toNav function
+  gamestate = "menu" //sets the gamestate to be menu
+  substate = "center" // sets the substate of gamestate = "summons" to "center"
+
+  // ===================== CLICK / MULTIPLIERS =====================
+  base = 1 
+  baseAdd = 0 
   multiplier = 1
   multiplierBoost = 1
-  offerMultiplier = 1
-  greedMultiplier = 1
   cultistModifier = 0
   bestCursor = cursorT1
   bgMusicShrine.stop()
-  
-  gamestate = "menu"
-  substate = "center"
-  summonCenter = []
-  ritualShow = 1
-  offerShow = 1 
-  cultistShow = 1 
-  greedShow = 1
-  
-  
-  statue1 = createImg("statue.png", "")
-  statue2 = createImg("statue.png", "")
-  settings = createImg("settings-1.gif", '')
-  playText = createP("PLAY")
-  tutorialText = createP("TUTORIAL")
-  settings.hide()
+
+
+  // ===================== UI ELEMENTS =====================
+  statue1 = createImg("statue.png", "") //creates the statue image for the tutorial gamestate
+  statue2 = createImg("statue.png", "") // creates another statue
+  settings = createImg("settings-1.gif", '') // creates an image for settings gamestat trigger
+  playText = createP("PLAY") // statue text for play
+  tutorialText = createP("TUTORIAL") // statue text for tutorial
+
+  //hides the elements
+  settings.hide() 
   statue1.hide()
   playText.hide()
   statue2.hide()
   tutorialText.hide()
-  
-    zombie1SpriteToken = 0
+
+  // ===================== SUMMON TOKEN =====================
+  //SETS ALL TOKENS TO 0
+  zombie1SpriteToken = 0
   zombie2SpriteToken = 0
   zombie3SpriteToken = 0
   spearSpriteToken = 0
@@ -697,53 +699,51 @@ function setup() {
   flameSpriteToken = 0
   lightSpriteToken = 0
   magicSpriteToken = 0
-  
-  
-  loadOnce = true
-  
-  
 
-//   // ------------------------------------ARRAYS------------------------------------------
-// Ritual arrays
+  // ===================== RITUAL ARRAYS =====================
   ritualPrices = [0, 20, 100, 1+"k", 20+"k", 50+"k", 100+"k", 500+"k", 750+"k", 1+"M", 1.25+"M", "NONE"]
-  ritualValue = [0,20,100,1000,20000,50000,100000,500000,750000,1000000,1250000]
-  ritualBase = [0,1,2,3,5,8,12,18,25,35,50] 
-  // Offer arrays
-  offerPrices = [0, 100, 1 +"k", 50+"k", 100+"k", 750+"k", 1+"M", 1.5+"M", 7+"M", 8+"M", 20+"M", "NONE"]
-  offerValue = [0,100,1000,50000,100000,750000,1000000,1500000,7000000,8000000,20000000]
-  offerMultipliers = [0,1,2,3,5,7,10,15,20,30,50,75] 
+  ritualValue = [0, 20, 100, 1000, 20000, 50000, 100000, 500000, 750000, 1000000, 1250000]
+  ritualBase = [0, 1, 2, 3, 5, 8, 12, 18, 25, 35, 50]
 
-  // Cultist arrays
+  // ===================== OFFER ARRAYS =====================
+  offerPrices = [0, 100, 1+"k", 50+"k", 100+"k", 750+"k", 1+"M", 1.5+"M", 7+"M", 8+"M", 20+"M", "NONE"]
+  offerValue = [0, 100, 1000, 50000, 100000, 750000, 1000000, 1500000, 7000000, 8000000, 20000000]
+  offerMultipliers = [0, 1, 2, 3, 5, 7, 10, 15, 20, 30, 50, 75]
+
+  // ===================== CULTIST ARRAYS =====================
   cultistPrices = [0, 500, 1+"k", 5+"k", 10+"k", 25+"k", 50+"k", 100+"k", 250+"k", 500+"k", 1+"M", "NONE"]
   cultistValues = [0, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000]
-  cultistModifiers = [0,0,1,2,3,5,8,12,18,25,35,50] 
+  cultistModifiers = [0, 0, 1, 2, 3, 5, 8, 12, 18, 25, 35, 50]
 
-  // Greed arrays
+  // ===================== GREED ARRAYS =====================
   greedPrices = [0, 300, 1+"k", 10+"k", 25+"k", 50+"k", 100+"k", 500+"k", 1+"M", 5+"M", 10+"M", "NONE"]
   greedValues = [0, 300, 1000, 10000, 25000, 50000, 100000, 500000, 1000000, 5000000, 10000000]
-  greedMultipliers = [0,1,2,3,5,7,10,15,20,30,50] 
-  
-//   CURSOR TIERS IMAGES
-  cursorArray = [0,cursorT1, cursorT2, cursorT3, cursorT4, cursorT5, cursorT6, cursorT7, cursorT8, cursorT9, cursorT10]
-  
-//   offer sprites
+  greedMultipliers = [0, 1, 2, 3, 5, 7, 10, 15, 20, 30, 50]
+
+  // ===================== CURSOR TIERS =====================
+  cursorArray = [0, cursorT1, cursorT2, cursorT3, cursorT4, cursorT5, cursorT6, cursorT7, cursorT8, cursorT9, cursorT10]
+
+  // ===================== CULTIST SPRITES =====================
   cultistSpriteArray = [0, T1idleSheet, T2idleSheet, T3idleSheet, T4idleSheet, T5idleSheet, T6idleSheet, T7idleSheet, T8idleSheet, T9idleSheet, T10idleSheet]
-//         SOUND ARRAYS
-  ritualSoundArray = [0,ritualT1Sound, ritualT2Sound, ritualT3Sound, ritualT4Sound, ritualT5Sound, ritualT6Sound, ritualT7Sound, ritualT8Sound, ritualT9Sound, ritualT10Sound]
-//   summon Center
+
+  // ===================== RITUAL SOUND ARRAY =====================
+  ritualSoundArray = [0, ritualT1Sound, ritualT2Sound, ritualT3Sound, ritualT4Sound, ritualT5Sound, ritualT6Sound, ritualT7Sound, ritualT8Sound, ritualT9Sound, ritualT10Sound]
+
+  // ===================== SUMMON CENTER =====================
   summonCenter = []
   eggPrices = [100, 500, 1000, 5000, 10000, 50000, 100000]
   eggShow = [100, 500, "1k", "5k", "10k", "50k", "100k"]
-//       nested array to store colors
-  eggColors = [[200, 50, 50], [200, 70, 70], [200, 90, 90], [200, 110, 110], [200, 130, 130], [200, 150, 150], [200, 170, 170] ]
-
+  eggColors = [[200, 50, 50], [200, 70, 70], [200, 90, 90], [200, 110, 110], [200, 130, 130], [200, 150, 150], [200, 170, 170]] //2d array
   eggNames = ["Common", "Uncommon", "Rare", "Legendary", "Mythic", "Godly", "Forbidden"]
-  maxCenter = 3 //max amount in summon center 
-  
-//   TUTORIAL:
-  tArray = [t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19,t20,t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36,t37,t38]
-// *********************************NEW CLASS ******************************************
+  maxCenter = 3
+
+  // ===================== TUTORIAL ARRAY =====================
+  tArray = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38]
+  tArrayMark = 0
+
+  // ===================== SPRITES =====================
   cultistSprite = new Sprite(cultistSpriteArray[offerShow], 20, 350, 3)
+      //------SUMMONS-------
   // COMMON
   zombie1Sprite = new Sprite(zombie1, 1)
   zombie2Sprite = new Sprite(zombie2, 1)
@@ -785,8 +785,8 @@ function setup() {
   lightSprite = new Sprite(light, 1)
   magicSprite = new Sprite(magic, 1)
 
-  // INV BOXES:
-    // COMMON
+  // ===================== INVENTORY BOXES =====================
+  // COMMON
   zombie1Box = new InventoryBox(20, 20, zombie1Sprite)
   zombie2Box = new InventoryBox(120, 20, zombie2Sprite)
   zombie3Box = new InventoryBox(220, 20, zombie3Sprite)
@@ -826,20 +826,18 @@ function setup() {
   flameBox = new InventoryBox(120, 620, flameSprite)
   lightBox = new InventoryBox(220, 620, lightSprite)
   magicBox = new InventoryBox(320, 620, magicSprite)
+
   
-  
-  loadGame()
+  loadGame() // loads and overides based on data stored in local storage
 } 
 // --------------------------------GAME LOOP------------------------------------------------------
 function draw() {
-  scale(scaleFactor)
   if (gamestate == "summon") {
     bgMusicShrine.stop()
     tokenAdd()
       
-    if(substate == "center")  {
-      tokenAdd()
-      if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
+    if(substate == "center")  { // this is the part of the summon center which has the purchasing options
+      if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) { // this condition checks if the cursor is over the box and changes cursor
         cursor(HAND)
       } else {
         cursor(AUTO)
@@ -871,7 +869,7 @@ function draw() {
       
       // Draw the summon center sprites
       for (let i = 0; i < summonCenter.length; i++) {
-        let s = summonCenter[i]
+        let s = summonCenter[i] // temporary variable to make code neater and easier to write
 
         // Draw the frame
         image(
@@ -983,12 +981,12 @@ function draw() {
       // ---------------- EGGS ----------------
       
 
-      let startX = 8
-      let y = 400
+      let startX = 8 //the x position of the FIRST box.
+      let y = 400 // the y position for all boxes
       let spacing = 115   // distance between eggs
 
-      for (let i = 0; i < eggNames.length; i++) {
-        let x = startX + i * spacing
+      for (let i = 0; i < eggNames.length; i++) { // draws all of the boxes
+        let x = startX + i * spacing // value for the box
         let centerX = x + 45
 
         // Box
@@ -1022,7 +1020,6 @@ function draw() {
 
   }
     if(substate == "inventory") {
-      tokenAdd()
       fill(28,28,28)
       rect(0,0,800,800)
       switchButton.show()
@@ -1077,40 +1074,45 @@ function draw() {
       statue2.hide()
       tutorialText.hide()
       bgMusicMenu.stop()
+      
     }
 
 
     if (gamestate == "menu") {
+      // toggle visibility of buttons
       statue1.show()
       playText.show()
       statue2.show()
       tutorialText.show()
-      statue1.size(468/2.2, 705/2.2)
-      statue1.style('z-index', 0)
-      statue1.position(0, 100)
-      statue1.mousePressed(toGame)
-      textSize(20)
-      playText.position(80,120)
-      playText.style('z-index', 1)
+      statue1.show()
+      playText.show()
+      statue2.show()
+      tutorialText.show()
+      switchButton.hide()
+      // create statue
+      statue1.size(468/2.2, 705/2.2) // size(x,y)
+      statue1.style('z-index', 0) // position front or back
+      statue1.position(0, 100) // position x,y
+      statue1.mousePressed(toGame) // event listener linked to toGame function
+      
+          // same for statue 2
       statue2.size(468/2.2, 705/2.2)
       statue2.style('z-index', 0)
       statue2.position(550, 100)
       statue2.mousePressed(toTutorial)
+      playText.position(80,120)
+      playText.style('z-index', 1)
+      // text
       textSize(20)
       tutorialText.position(615,120)
       tutorialText.style('z-index', 1)
       scale(1.3)
       image(menuBg, 0,0, menuBg.width, 400)
       scale(1/1.3)
-      statue1.show()
-      playText.show()
-      statue2.show()
-      tutorialText.show()
-      bgMusicShrine.stop()
-      switchButton.hide()
-      
-      if (bgMusicMenu.isPlaying()) {
 
+      bgMusicShrine.stop()
+
+      if (bgMusicMenu.isPlaying()) {
       } else {
         bgMusicMenu.play()
       }
@@ -1131,7 +1133,6 @@ function draw() {
     if (gamestate == "tutorial") {
       
       if (tMusic.isPlaying()) {
-
       } else {
         tMusic.play()
       }
@@ -1144,13 +1145,12 @@ function draw() {
     } else{
       tMusic.stop()
     }
-    if (gamestate !== "settings") {
-      
-    }
+
     if (gamestate == "settings") {
-      
+      // toggle button visibility
       eraseButton.show()
       settings.hide()
+      //create box in which the erase progress button is
       noStroke()
       fill(245,20,53,1)
       rect(0,0,800,800)
@@ -1161,60 +1161,44 @@ function draw() {
       fill(200, 0, 0)
       stroke(120, 0, 0)
       strokeWeight(3)
-
-      
-      eraseButton.position(140,85)
-      eraseButton.size(520,440)
-      eraseButton.style("font-size", "60px")
-      eraseButton.style('background-color', '#1a1a1a') // bg color
-      eraseButton.style('color', '#f5f5f5') // text color
-      eraseButton.style('font-family', 'monospace') // font
-      eraseButton.style('border', '2px solid #660000') //border: thickness, type, color
-      eraseButton.style('border-radius', '4px') // curvature
-      eraseButton.style('padding', '10px 20px') // space around text (box size)
-      eraseButton.style('cursor', 'pointer') // cursor
-      
-      eraseButton.mouseOver(eraseHover)
-      eraseButton.mouseOut(eraseNotHover)
-      
-     
-
     } else{
       eraseButton.hide()
     }
 
     if (gamestate == "game") {
+      //plays music
+      if (bgMusicShrine.isPlaying()) {
+      } else {
+        bgMusicShrine.play()
+      }
+      // toggle button visibility
       statue1.hide()
       playText.hide()
       statue2.hide()
       tutorialText.hide()
-      bgMusicMenu.stop()
       switchButton.show()
+      // button position
       switchButton.position(10,20)
 
-      if (bgMusicShrine.isPlaying()) {
-
-      } else {
-        bgMusicShrine.play()
-      }
+      // image elements
       background(28,28,28)
-
       image(shrineBg, 0, 0, 800, 600)
-
       image(shrine ,140,25)
-
+      // text elements
+      scoreShow = floor(score)
       textFont(essenceFont)
       textSize(50)
       fill(136, 8, 8)
-      scoreShow = floor(score)
       text("ESSENCE:  " + scoreShow,255, 80)
+      // makes the sprite
       cultistSprite.make()
+      // change cursor when hovering on shrine
       if (mouseX >= 310 && mouseX <= 457 && mouseY >= 237 && mouseY<=466) {
         noCursor()
         image(cursorArray[ritualShow], mouseX, mouseY, 50,50)    
 
       }
-      else {cursor(AUTO)}
+      else {cursor(AUTO)} // chance cursor when not on shrine
     }
   if (gamestate !== "shop" && gamestate !== "nav") {
     shopBgMusic.stop()
@@ -1222,72 +1206,78 @@ function draw() {
   }
   // what to do if its in the shop stage
     if (gamestate == "shop") {
+      // play music and sound effects
       if (shopBgMusic.isPlaying()) {
-        
       } else {
         shopBgMusic.play()
       }
-      
       if (fire.isPlaying()) {
-        
       } else {
         fire.play()
       }
       
-      
+      //fill the excess space in background
       fill(28,28,28)
       rect(0,600,800,600)
       noStroke()
       fill(28,28,28)
-      switchButton.show()
       
+      //show and locate the travel button
+      switchButton.show()
       switchButton.position(10,20)
+      //music off
       bgMusicShrine.stop()
       bgMusicMenu.stop()
-
+      
+      
+      //Image elements of this gamestate
       image(shopBg,0,0,800,600)
-
       image(shopWidget, 400, -30, 400, 400)
       image(shopWidget, 0, -30, 400, 400)
       image(shopWidget, 400, 270, 400, 400)
       image(shopWidget, 0, 270, 400, 400)
-
+      
+      
+      //TExt elements of the gamestate
       fill(255)
       textSize(20)
       textFont("Ariel")
-
+      
+      
+      //RITUAL
       text("NEXT TIER RITUAL", 115, 160)
       text("TIER   " + tierRitual, 165, 190)
       text("Price " + ritualPrices[ritualShow], 165,215 )
-
+      //OFFER
       text("NEXT TIER OFFER", 515, 160)
       text("TIER   " + tierOffer, 565, 190)
       text("Price " + offerPrices[offerShow], 565,215 )
-
+      //CULTIST
       text("NEXT TIER CULTIST", 108, 460)
       text("TIER   " + tierCultist, 165, 490)
       text("Price " + cultistPrices[cultistShow], 165,520 )
-
+      //GREED
       text("NEXT TIER GREED", 515, 460)
       text("TIER   " + tierGreed, 565, 490)
       text("Price " + greedPrices[greedShow], 565,520 )
     }
   
   if (gamestate == "nav") {
+    // background color of the gamestate
     noStroke()
     fill(245,20,53,1)
     rect(0,0,800,800)
+    //BOX WITH SMALL BOXES
     stroke(180, 180, 220)      
     strokeWeight(6)
     fill(40, 10, 60, 220)      
     rect(100, 50, 600, 500, 20)
     
-    
+    //SMALLER BOXES
     fill(200, 0, 0)
     stroke(120, 0, 0)
     strokeWeight(3)
-
-    // top-left
+   // top-left
     rect(140, 60, 220, 220, 10)
     // top-right
     rect(440, 60, 220, 220, 10)
@@ -1296,7 +1286,7 @@ function draw() {
     // bottom-right
     rect(440, 320, 220, 220, 10)
     
-    
+    //TEXTS
     fill(255)
     textFont(essenceFont)
     textSize(20)
@@ -1307,14 +1297,19 @@ function draw() {
     }
 
   if (gamestate == "end") {
-    noStroke()
+    // hide elements
     settings.hide()
-    bgMusicShrine.stop()
-    bgMusicMenu.stop()
-    fill(28,28,28)
-    rect(0,0,800,800)
     eraseButton.hide()
     switchButton.hide()
+    //REMOVE STROKE
+    noStroke()
+    //Stop MUSIC
+    bgMusicShrine.stop()
+    bgMusicMenu.stop()
+    //FILL THE SCREEN BLANK
+    fill(28,28,28)
+    rect(0,0,800,800)
+    
   }
 }
 
@@ -1336,34 +1331,33 @@ function mousePressed() {
 
 
     //   ------------------------------  Handles uprade purchases----------------------------------
-//       ritual upgrade
+//  ritual upgrade
     if (mouseX >= 68 && mouseX <= 323 && mouseY >= 77 && mouseY<=217) {
 
-      if(ritualValue[ritualShow]<= score) {
+      if(ritualValue[ritualShow]<= score) { // checks if the player has enough essence
 
-        if (tierRitual< 10 && ritualShow<10) {
-          score-=ritualValue[ritualShow]
-          tierRitual++
-          ritualShow++
+        if (tierRitual< 10 && ritualShow<10) { // checks if they have maxed out the ritual
+          score-=ritualValue[ritualShow] // remove score
+          tierRitual++ // adds value to what is shown to player
+          ritualShow++ // adds to the ritual value
           saveGame()
         }
 
-        if (tierRitual == 10) {
+        if (tierRitual == 10) { // if they have maxed out, change the screen for the players
           tierRitual = "MAX"
           ritualShow=10
-          saveGame()
+          saveGame() // save game
         }
       }
     }
-//     offering upgrade
-    if (mouseX >= 498 && mouseX <= 700 && mouseY >= 98 && mouseY<=214) {
+//     offering upgrade (SAME FORMAT AS THE RITUAL)
+    if (mouseX >= 498 && mouseX <= 700 && mouseY >= 98 && mouseY<=214) { 
       // OFFER PURCHASE
       if (offerValue[offerShow] <= score) {
         if (tierOffer < 10 && offerShow < 10) {
           score -= offerValue[offerShow]
           tierOffer++
           offerShow++
-          offerMultiplier++
           saveGame()
         }
         if (tierOffer == 10) {
@@ -1373,7 +1367,7 @@ function mousePressed() {
         }
       }
     }
-//     cultist upgrade
+//     cultist upgrade (SAME FORMAT EXCEPT CHANGING SPRITES)
     if (mouseX >= 68 && mouseX <= 323 && mouseY >= 400 && mouseY<=500) {
       // CULTIST PURCHASE
       if(cultistValues[cultistShow] <= score) {
@@ -1381,9 +1375,8 @@ function mousePressed() {
           score -= cultistValues[cultistShow]
           tierCultist++
           cultistShow++
-          cultistModifier++
 //           CHANGING THE SPRITE AT UPGRADE
-          cultistSprite.image = cultistSpriteArray[cultistShow] // cchanges the image 
+          cultistSprite.image = cultistSpriteArray[cultistShow] // changes the image 
           cultistSprite.size = cultistSprite.image.height // changes the dimensions
           cultistSprite.totalFrames = cultistSprite.image.width / cultistSprite.image.height // calculates the new amount of frames
           cultistSprite.frame = 0 // resets animation
@@ -1395,7 +1388,7 @@ function mousePressed() {
         }
       }
     }
-//  greed upgrade
+//  greed upgrade (SAME FORMAT AS RITUAL)
     if (mouseX >= 498 && mouseX <= 700 && mouseY >= 400 && mouseY<=500) {
       // GREED PURCHASE
       if(greedValues[greedShow] <= score) {
@@ -1403,7 +1396,6 @@ function mousePressed() {
           score -= greedValues[greedShow]
           tierGreed++
           greedShow++
-          greedMultiplier++
           saveGame()
         }
         if (tierGreed == 10) {
@@ -1419,16 +1411,15 @@ function mousePressed() {
 
     if (substate == "center") {
       saveGame()
-
-      if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) {
+      if (mouseX>= 150 && mouseX<=650 && mouseY>=100 && mouseY<=350) { // CHECKS IF PLAYER HAS CLICKED THE BOX
         cursor(AUTO)
         substate = "inventory"
       }
       // EGG 1 - COMMON
-      if (mouseX >= 8 && mouseX <= 98 && mouseY >= 400 && mouseY <= 510) {
-          if (score >= eggPrices[0]) {
-              score -= eggPrices[0]
-              Swal.fire({
+      if (mouseX >= 8 && mouseX <= 98 && mouseY >= 400 && mouseY <= 510) { // check to see if they want to buy first egg
+          if (score >= eggPrices[0]) { //check if the player has enough money
+              score -= eggPrices[0]// subtracts cost from score
+              Swal.fire({ // success message
                   toast: true, 
                   position: 'top-end',
                   icon: 'success',
@@ -1437,6 +1428,7 @@ function mousePressed() {
                   timer: 1500,
                   timerProgressBar: true
               })
+            // CHOOSES RANDOMLY WHICH SUMMON THEY GET
               let randNum = int(random(1,100))
               if (randNum>=1 && randNum<55) {  
                   zombie1Box.amount++
@@ -1451,8 +1443,8 @@ function mousePressed() {
                   spearBox.amount++
               }
           } 
-          if (score < eggPrices[0]) {
-              Swal.fire({
+          if (score < eggPrices[0]) { // if they dont have enough essence 
+              Swal.fire({ // error message
                   toast: true,
                   position: 'top-end',
                   icon: 'error',
@@ -1463,7 +1455,7 @@ function mousePressed() {
               })
           }
       }
-
+                        // THE REST OF THE "EGGS" FOLLOW THE EXACT SAME LOGIC AS EGG 1 JUST WITH DIFFERENT ODDS
       // EGG 2 - UNCOMMON
       if (mouseX >= 125 && mouseX <= 215 && mouseY >= 400 && mouseY <= 510) {
           if (score >= eggPrices[1]) {
@@ -1703,13 +1695,13 @@ function mousePressed() {
     if (substate == "inventory") {
       saveGame()
       
-
+      // CHECKS IF INVENTORY BOXES ARE CLICKED:
 // ====================== COMMON ======================
       // zombie1Box
-      if (mouseX >= zombie1Box.x && mouseX <= zombie1Box.x + zombie1Box.size && mouseY >=  zombie1Box.y && mouseY <= zombie1Box.y + zombie1Box.size) {
+      if (mouseX >= zombie1Box.x && mouseX <= zombie1Box.x + zombie1Box.size && mouseY >=  zombie1Box.y && mouseY <= zombie1Box.y + zombie1Box.size) { // IF BOX 1. CHECKS IF MOUSE WAS WITHIN THE BOUNDS OF IT
 
-        if (summonCenter.length == maxCenter) {
-          Swal.fire({
+        if (summonCenter.length == maxCenter) { // IF SUMMON CENTER IS FULL
+          Swal.fire({ // ERROR MESSAGE
             toast: true,
             position: 'top-end',
             icon: 'error',
@@ -1720,8 +1712,8 @@ function mousePressed() {
           })
         }
 
-        if (summonCenter.length < maxCenter) {
-          if (zombie1Box.amount >= 1) {
+        if (summonCenter.length < maxCenter) { // IF IT ISNT;
+          if (zombie1Box.amount >= 1) { // SUCCESS MESSAGE
             zombie1Box.stroke = "green"
             zombie1Box.amount--
 
@@ -1740,7 +1732,7 @@ function mousePressed() {
           }
         }
       }
-
+// ------------------SAME LOGIC EXACTLY FOR THE REST OF THE REST OF THE INVENTORY BOXES ------------------
       // zombie2Box
       if (mouseX >= zombie2Box.x && mouseX <= zombie2Box.x + zombie2Box.size && mouseY >= zombie2Box.y && mouseY <= zombie2Box.y + zombie2Box.size) {
 
@@ -2723,39 +2715,41 @@ function mousePressed() {
 
 
 function saveGame() {
+  //COMMON SPRITE AMOUNTS
   zombie1SpriteToken = zombie1Box.amount
   zombie2SpriteToken = zombie2Box.amount
   zombie3SpriteToken = zombie3Box.amount
   spearSpriteToken = spearBox.amount
-
+  // UNCOMMON SPRITE AMOUNTS
   minotaur1SpriteToken = minotaur1Box.amount
   minotaur2SpriteToken = minotaur2Box.amount
   minotaur3SpriteToken = minotaur3Box.amount
   skeletonSpriteToken = skeletonBox.amount
-
+  // RARE SPRITE AMOUNTS
   ravenSpriteToken = ravenBox.amount
   mushroomSpriteToken = mushroomBox.amount
   goblinSpriteToken = goblinBox.amount
-
+  // LEGENDARY SPRITE AMOUNTS
   goblinBeastSpriteToken = goblinBeastBox.amount
   ancientSkeletonSpriteToken = ancientSkeletonBox.amount
   goblinRiderSpriteToken = goblinRiderBox.amount
   necromancerSpriteToken = necromancerBox.amount
-
+  // MYTHIC SPRITE AMOUNTS
   kitsuneSpriteToken = kitsuneBox.amount
   eyeSpriteToken = eyeBox.amount
   knightSpriteToken = knightBox.amount
   flareSpriteToken = flareBox.amount
-
+  // GODLY SPRITE AMOUNTS
   skeletonGeneralSpriteToken = skeletonGeneralBox.amount
   plant1SpriteToken = plant1Box.amount
   archerSpriteToken = archerBox.amount
   skeletonKingSpriteToken = skeletonKingBox.amount
-
+  // FORBIDDEN SPRITE AMOUNTS
   flameSpriteToken = flameBox.amount
   lightSpriteToken = lightBox.amount
   magicSpriteToken = magicBox.amount
   
+  //STORAGE OF KEY GAME AMOUNTS
   storeItem("score", score)
   storeItem("ritualShow", ritualShow)
   storeItem("offerShow", offerShow)
@@ -2803,6 +2797,15 @@ function saveGame() {
 }
 
 function loadGame() {
+  /*
+  THIS ENTIRE CODE FOLLOWS THIS STRUCTURE. A FUNCTION WOULD HAVE BEEN EFFECTIVE, BUT IT DIDN'T CROSS MY MIND
+  
+  let variable = getItem("something stored in local storage")
+  if (variable != null) {
+    let the corresponding global variable have the value of the temporary variable
+  }
+  
+  */
   let s = getItem("score")
   if (s !== null) {
     score = s
@@ -2978,6 +2981,7 @@ function loadGame() {
     magicSpriteToken = mg
   }
   
+  // SETS THE AMOUNT OF SPRITES TO THE AMOUNT OF TOKENS
   zombie1Box.amount = zombie1SpriteToken
   zombie2Box.amount = zombie2SpriteToken
   zombie3Box.amount = zombie3SpriteToken
@@ -3023,6 +3027,7 @@ function loadGame() {
 
 
 function gameDelete() {
+  // checks if the player really wants to delete
   let confirmed = confirm("WAIT! ARE YOU SURE?")
   if (confirmed) {
 //     REMOVES EVERYTHING! ALL PROGRESS
@@ -3061,59 +3066,7 @@ function gameDelete() {
     removeItem("flameSpriteToken", flameSpriteToken)
     removeItem("lightSpriteToken", lightSpriteToken)
     removeItem("magicSpriteToken", magicSpriteToken)
-    summonCenter = []
-    zombie1SpriteToken = 0
-    zombie2SpriteToken = 0
-    zombie3SpriteToken = 0
-    spearSpriteToken = 0
-    minotaur1SpriteToken = 0
-    minotaur2SpriteToken = 0
-    minotaur3SpriteToken = 0
-    skeletonSpriteToken = 0
-    ravenSpriteToken = 0
-    mushroomSpriteToken = 0
-    goblinSpriteToken = 0
-    goblinBeastSpriteToken = 0
-    ancientSkeletonSpriteToken = 0
-    goblinRiderSpriteToken = 0
-    necromancerSpriteToken = 0
-    kitsuneSpriteToken = 0
-    eyeSpriteToken = 0
-    knightSpriteToken = 0
-    flareSpriteToken = 0
-    skeletonGeneralSpriteToken = 0
-    plant1SpriteToken = 0
-    archerSpriteToken = 0
-    skeletonKingSpriteToken = 0
-    flameSpriteToken = 0
-    lightSpriteToken = 0
-    magicSpriteToken = 0
-    zombie1Box.amount = 0
-    zombie2Box.amount = 0
-    zombie3Box.amount = 0
-    spearBox.amount = 0
-    minotaur1Box.amount = 0
-    minotaur2Box.amount = 0
-    minotaur3Box.amount = 0
-    skeletonBox.amount = 0
-    ravenBox.amount = 0
-    mushroomBox.amount = 0
-    goblinBox.amount = 0
-    goblinBeastBox.amount = 0
-    ancientSkeletonBox.amount = 0
-    goblinRiderBox.amount = 0
-    necromancerBox.amount = 0
-    kitsuneBox.amount = 0
-    eyeBox.amount = 0
-    knightBox.amount = 0
-    flareBox.amount = 0
-    skeletonGeneralBox.amount = 0
-    plant1Box.amount = 0
-    archerBox.amount = 0
-    skeletonKingBox.amount = 0
-    flameBox.amount = 0
-    lightBox.amount = 0
-    magicBox.amount = 0
+    // sets gamestate to end
     gamestate = "end"
   }  
   
@@ -3121,15 +3074,38 @@ function gameDelete() {
 
 
 function toNav() {
+  /* FUNCTION HEADER
+  
+FUNCTION NAME: toNav
+  
+DESCRIPTION: CHANGES gamestate TO nav`
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
   gamestate = "nav"
   switchButton.hide()
 }
 
 
 function tokenAdd() {
+  /* FUNCTION HEADER
+  
+FUNCTION NAME: tokenAdd
+  
+DESCRIPTION: It changes the amount of each sprite in the summon center based on what was stored in local storage.
+  
+ARGUMENTS: none
+  
+RETURNS: none
+  
+  
+*/
   for (let i = 0; i < summonCenter.length; i++) {
-    // COMMON
-    if (summonCenter.length > 0) {
+    // THIS LOOP GOES THROUGH THE SUMMON CENTER AND MAKES THE TOKEN OF THE SPRITE IT FINDS EQUAL TO THE AMOUNT OF THAT SPRITE THAT EXIST.
+        // COMMON
         if (summonCenter[i] == zombie1Sprite) {
             zombie1SpriteToken++
         }
@@ -3221,22 +3197,15 @@ function tokenAdd() {
             magicSpriteToken++
         }
     }
-  }
 }
 
 
 function hover() {
   /* FUNCTION HEADER
-  
 FUNCTION NAME: HOVER
-  
 DESCRIPTION: it changes the style of the travel button when mouse is over it
-  
 ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+RETURNS: none  
 */
   switchButton.style('background-color', '#2b0000') //color of button
   switchButton.style('box-shadow', '0 0 10px #ff3333') // color of shadow
@@ -3245,16 +3214,10 @@ RETURNS: none
 
 function notHover() {
   /* FUNCTION HEADER
-  
 FUNCTION NAME:notHover
-  
-DESCRIPTION: it reverts back to the original styling of the travel button when mouse is taken off
-  
+DESCRIPTION: it reverts back to the original styling of the travel button when mouse is taken off  
 ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+RETURNS: none   
 */
   switchButton.style('background-color', '#1a1a1a') // color of buttton
   switchButton.style('box-shadow', '0 0 5px #660000') // color of shadow
@@ -3262,82 +3225,52 @@ RETURNS: none
 }
 
 function toGame () {
-  /* FUNCTION HEADER
-  
-FUNCTION NAME: toGame
-  
-DESCRIPTION:changes gamestate to game
-  
-ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+  /* FUNCTION HEADER  
+FUNCTION NAME: toGame  
+DESCRIPTION:changes gamestate to game  
+ARGUMENTS: none  
+RETURNS: none   
 */
   gamestate = "game"
 }
 
 function toTutorial() {
-  /* FUNCTION HEADER
-  
-FUNCTION NAME:toTutorial
-  
-DESCRIPTION: changes gamestate to tutorial
-  
-ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+  /* FUNCTION HEADER  
+FUNCTION NAME:toTutorial  
+DESCRIPTION: changes gamestate to tutorial  
+ARGUMENTS: none  
+RETURNS: none  
 */
   gamestate = "tutorial"
 }
 
 function toSettings() {
   gamestate = "settings"
-  /* FUNCTION HEADER
-  
-FUNCTION NAME: toSettings
-  
-DESCRIPTION: changes gamestate to setting
-  
-ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+  /* FUNCTION HEADER  
+FUNCTION NAME: toSettings  
+DESCRIPTION: changes gamestate to setting  
+ARGUMENTS: none  
+RETURNS: none  
 */
 }
 
 
 function settingsHover() {
-  /* FUNCTION HEADER
-  
-FUNCTION NAME:settingsHover
-  
-DESCRIPTION: changes the curson when the mouse is over the settngs button
-  
-ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+  /* FUNCTION HEADER  
+FUNCTION NAME:settingsHover  
+DESCRIPTION: changes the curson when the mouse is over the settngs button  
+ARGUMENTS: none 
+RETURNS: none    
 */
   settings.style("cursor", "pointer")
 }
 
 function eraseHover() {
-  /* FUNCTION HEADER
-  
-FUNCTION NAME: eraseHover
-  
-DESCRIPTION: changes the style when mouse is over the erase progress button
-  
-ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+  /* FUNCTION HEADER  
+FUNCTION NAME: eraseHover  
+DESCRIPTION: changes the style when mouse is over the erase progress button  
+ARGUMENTS: none  
+RETURNS: none  
 */
   eraseButton.style('background-color', '#2b0000') //color of button
   eraseButton.style('box-shadow', '0 0 10px #ff3333') // color of shadow
@@ -3345,17 +3278,11 @@ RETURNS: none
 }
 
 function eraseNotHover() {
-  /* FUNCTION HEADER
-  
-FUNCTION NAME: eraseNotHover
-  
-DESCRIPTION: reverts back to original style when not on erase button
-  
-ARGUMENTS: none
-  
-RETURNS: none
-  
-  
+  /* FUNCTION HEADER  
+FUNCTION NAME: eraseNotHover  
+DESCRIPTION: reverts back to original style when not on erase button  
+ARGUMENTS: none  
+RETURNS: none    
 */
   eraseButton.style('background-color', '#1a1a1a') // color of buttton
   eraseButton.style('box-shadow', '0 0 5px #660000') // color of shadow
@@ -3370,5 +3297,4 @@ RETURNS: none
 
 // to do:
   //end screen ~2 mins
-  //switch back ~4-5mins
   //tutorial to back ~1-2 mins
